@@ -7,12 +7,18 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import controller.database.DatabaseController;
+import model.UserModel;
+import util.StringUtils;
+
 /**
  * Servlet implementation class RegisterServlet
  */
 @WebServlet("/RegisterServlet")
 public class RegisterServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	
+	DatabaseController dbController = new DatabaseController();
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -34,8 +40,30 @@ public class RegisterServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		String firstName = request.getParameter(StringUtils.FIRST_NAME);
+		String lastName = request.getParameter(StringUtils.LAST_NAME);
+		String userName = request.getParameter(StringUtils.USER_NAME);
+		String email = request.getParameter(StringUtils.EMAIL);
+		String address = request.getParameter(StringUtils.ADDRESS);
+		String phoneNumber = request.getParameter(StringUtils.PHONE_NUMBER);
+		String password = request.getParameter(StringUtils.PASSWORD);
+		String confirmPassword = request.getParameter(StringUtils.CONFIRM_PASSWORD);
+		
+		UserModel userModel = new UserModel(firstName, lastName, userName, email, address, phoneNumber, password, confirmPassword);
+		int result = dbController.addUser(userModel);
+		
+		if(result ==1) {
+			request.setAttribute(StringUtils.SUCCESS_MESSAGE, StringUtils.SUCCESS_REGISTER_MESSAGE);
+			response.sendRedirect(request.getContextPath() + "/pages/login.jsp");
+		}else if (result == 0) {
+			request.setAttribute(StringUtils.ERROR_MESSAGE, StringUtils.ERROR_MESSAGE);
+			request.getRequestDispatcher(StringUtils.REGISTER_PAGE).forward(request, response);
+		}else {
+			request.setAttribute("errorMessage",StringUtils.SERVER_ERROR_MESSAGE);
+			request.getRequestDispatcher(StringUtils.REGISTER_PAGE).forward(request, response);
+		}
+		
 	}
-
 }
+
+

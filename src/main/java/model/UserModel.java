@@ -17,11 +17,11 @@ public class UserModel  {
 		private String userName;
 		private String email;
 		private String address;
-		private int phoneNumber;
+		private String phoneNumber;
 		private String password;
 		private String confirmPassword;
 		
-		public UserModel (String firstName, String lastName, String userName, String email, String address, int phoneNumber, String password, String confirmPassword) {
+		public UserModel (String firstName, String lastName, String userName, String email, String address, String phoneNumber, String password, String confirmPassword) {
 			this.firstName = firstName;
 			this.lastName = lastName;
 			this.userName = userName;
@@ -73,11 +73,11 @@ public class UserModel  {
 			this.address = address;
 		}
 
-		public int getPhoneNumber() {
+		public String getPhoneNumber() {
 			return phoneNumber;
 		}
 
-		public void setPhoneNumber(int phoneNumber) {
+		public void setPhoneNumber(String phoneNumber) {
 			this.phoneNumber = phoneNumber;
 		}
 

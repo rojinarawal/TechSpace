@@ -6,7 +6,7 @@
 
     <head>
         <meta charset="UTF-8">
-        <title> Responsive Registration Form | CodingLab </title>
+        <title> Register</title>
       	 <link rel="stylesheet" type="text/css"
       	 	href="/TechSpace/stylesheets/signup.css" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -19,7 +19,7 @@
         <div class="container">
             <div class="title">Sign Up</div>
             <div class="content">
-                <form action="#">
+                <form action="/TechSpace/RegisterServlet" method="post">
                     <div class="user-details">
                         <div class="input-box">
                             <span class="details">First Name</span>
@@ -62,13 +62,13 @@
                 <div class="login-link">
                     <p>Already have an account? <a href="#">Sign in</a></p>
                 </div>
-                
+               </div>
         
         </div>
 
     </section>
     <div class="image-container">
-        <img src="wishlist.jpeg" alt="TechSpace">
+        <img src="/stylesheets/images/wishlist.jpeg" alt="TechSpace">
         </div>
     
 

@@ -1,11 +1,11 @@
 package controller.database;
 
 import java.sql.Connection;
-import java.sql.Date;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import model.UserModel;
 import util.StringUtils;
 
 public class DatabaseController {
@@ -15,39 +15,28 @@ public class DatabaseController {
 		String url = "jdbc:mysql://localhost:3306/techspace";
 		String user = "root";
 		String pass = "root";
-		return DriverManager.getConnection(url, user, pass);
-		
-		public int addUser(UserModel userModel) {
-			try (Connection con = getConnection()) {
-				PreparedStatement st = con.prepareStatement(StringUtils.INSERT_USER_INFO);
-				
-				//check for existing username
-				PreparedStatement checkUsername = con.prepareStatement(StringUtils.GET_ALL_USER_INFO);
-				checkUsernameSt.setString(1, studentModel.getUsername());
-				ResultSet checkUsernameRs = checkUsernameSt.executeQuery();
-				checkUsernameRs.next();
-				if (checkUsernameRs.getInt(1) > 0) {
-					return -2; //Username already exists
-				}
-				
-				st.setString(1, studentModel.getUsername());
-				st.setString(2, studentModel.getFirstName());
-				st.setString(3, studentModel.getLastName());
-				st.setDate(4, Date.valueOf(studentModel.getDob()));
-				st.setString(5, studentModel.getGender());
-				st.setString(6, studentModel.getEmail());
-				st.setString(7, studentModel.getPhoneNumber());
-				st.setString(8, studentModel.getSubject());
-				st.setString(9, studentModel.getPassword());
-				
-				int result = st.executeUpdate();
-				return result > 0 ? 1 : 0;
-			} catch (SQLException | ClassNotFoundException ex) {
-				ex.printStackTrace(); // Log the exception for debugging
-				return -1;
-			}
+		return DriverManager.getConnection(url, user, pass);	
+	}
+	
+	public int addUser(UserModel userModel) {
+		try (Connection con = getConnection()) {
+			PreparedStatement u = con.prepareStatement(StringUtils.INSERT_USER);
+			
+			u.setString (1, userModel.getFirstName());
+			u.setString (2, userModel.getLastName());
+			u.setString(3, userModel.getUserName());
+			u.setString(4, userModel.getEmail());
+			u.setString(5, userModel.getAddress());
+			u.setString(6, userModel.getPhoneNumber());
+			u.setString(7, userModel.getPassword());
+			u.setString(8, userModel.getConfirmPassword());
+			
+			int result = u.executeUpdate();
+			return result > 0 ? 1 : 0;
+		} catch (SQLException | ClassNotFoundException e) {
+			e.printStackTrace();
+			return -1;
 		}
-		
-		
-		
+	}
 }
+	
