@@ -35,10 +35,6 @@ public static final String INSERT_USER = "INSERT INTO user_info "
 	public static final String REGISTER_SERVLET="/RegisterServlet";
 	//End Servlet Route
 
-	public static final String REGISTER_STUDENT = "INSERT INTO user_info"
-			+"(first_name, last_name, user_name, email, address, phone_number, password, confirm_password) "
-			+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-	
 	public static final String SUCCESS_REGISTER_MESSAGE = "Successfully Registered.";
 	public static final String ERROR_REGISTER_MESSAGE = "Please correct the form data.";
 }

@@ -23,35 +23,35 @@
                     <div class="user-details">
                         <div class="input-box">
                             <span class="details">First Name</span>
-                            <input type="text" placeholder="First Name" required>
+                            <input type="text" name="firstName" placeholder="First Name" required>
                         </div>
                         <div class="input-box">
                             <span class="details">Last Name</span>
-                            <input type="text" placeholder="Last Name" required>
+                            <input type="text" name="lastName" placeholder="Last Name" required>
                         </div>
                         <div class="input-box">
-                            <span class="details">Username</span>
-                            <input type="text" placeholder="Username" required>
+                            <span class="details">User Name</span>
+                            <input type="text" name="userName" placeholder="Username" required>
                         </div>
                         <div class="input-box">
                             <span class="details">Email</span>
-                            <input type="text" placeholder="example@gmail.com" required>
+                            <input type="text" name="email" placeholder="example@gmail.com" required>
                         </div>
                         <div class="input-box">
                             <span class="details">Address</span>
-                            <input type="text" placeholder="Address" required>
+                            <input type="text" name="address" placeholder="Address" required>
                         </div>
                         <div class="input-box">
                             <span class="details">Phone Number</span>
-                            <input type="text" placeholder="Number" required>
+                            <input type="text" name="phoneNumber" placeholder="Number" required>
                         </div>
                         <div class="input-box">
                             <span class="details">Password</span>
-                            <input type="text" placeholder="Password" required>
+                            <input type="text" name="password" placeholder="Password" required>
                         </div>
                         <div class="input-box">
                             <span class="details">Confirm Password</span>
-                            <input type="text" placeholder="Confirm Password" required>
+                            <input type="text" name="confirmPassword" placeholder="Confirm Password" required>
                         </div>
                     </div>
                     
