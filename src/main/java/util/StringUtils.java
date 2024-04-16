@@ -24,6 +24,12 @@ public static final String INSERT_USER = "INSERT INTO user_info "
 	public static final String ERROR_MESSAGE="errorMessage";
 	public static final String LOGIN_ERROR_MESSAGE="Invalid credential.";
 	public static final String SUCCESS_LOGIN_MESSAGE="Login successful.";
+	
+	public static final String USERNAME_ERROR_MESSAGE="Username is already registered.";
+	public static final String EMAIL_ERROR_MESSAGE="Email is already registered.";
+	public static final String PHONE_NUMBER_ERROR_MESSAGE="Phone number is already registered.";
+	public static final String PASSWORD_UNMATCHED_ERROR_MESSAGE="Password is not matched.";
+	
 	//End messages
 
 	//Start JSP Route
@@ -37,4 +43,10 @@ public static final String INSERT_USER = "INSERT INTO user_info "
 
 	public static final String SUCCESS_REGISTER_MESSAGE = "Successfully Registered.";
 	public static final String ERROR_REGISTER_MESSAGE = "Please correct the form data.";
+	
+	
+	public static final String GET_USERNAME = "SELECT COUNT(*) FROM user_info where user_name = ? ";
+	public static final String GET_PHONE = "SELECT COUNT(*) FROM user_info where phone_number = ? ";
+	public static final String GET_EMAIL = "SELECT COUNT(*) FROM user_info where email = ? ";
+
 }

@@ -1,4 +1,4 @@
-<%@page import= "util.StringUtils" %>
+<%@ page import= "util.StringUtils" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <!DOCTYPE html>
@@ -7,14 +7,15 @@
     <head>
         <meta charset="UTF-8">
         <title> Register</title>
-      	 <link rel="stylesheet" type="text/css"
-      	 	href="/TechSpace/stylesheets/signup.css" />
+      	 <link rel="stylesheet" type="text/css" href="/TechSpace/stylesheets/signup.css" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
 
     <body>
         <section>
-         <div class="heading"><p> TechSpace</p></div>   
+         <div class="heading">
+         	<p> TechSpace</p>
+         </div>   
         
         <div class="container">
             <div class="title">Sign Up</div>
@@ -47,11 +48,11 @@
                         </div>
                         <div class="input-box">
                             <span class="details">Password</span>
-                            <input type="text" name="password" placeholder="Password" required>
+                            <input type="password" name="password" placeholder="Password" required>
                         </div>
                         <div class="input-box">
                             <span class="details">Confirm Password</span>
-                            <input type="text" name="confirmPassword" placeholder="Confirm Password" required>
+                            <input type="password" name="confirmPassword" placeholder="Confirm Password" required>
                         </div>
                     </div>
                     
@@ -67,8 +68,8 @@
         </div>
 
     </section>
-    <div class="image-container">
-        <img src="/stylesheets/images/wishlist.jpeg" alt="TechSpace">
+    <div >
+        <img src="../stylesheets/images/wishlist.jpeg" alt="TechSpace" class="image-container">
         </div>
     
 

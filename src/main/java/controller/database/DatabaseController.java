@@ -3,6 +3,7 @@ package controller.database;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import model.UserModel;
@@ -22,6 +23,16 @@ public class DatabaseController {
 		try (Connection con = getConnection()) {
 			PreparedStatement u = con.prepareStatement(StringUtils.INSERT_USER);
 			
+			//check for existing username
+			PreparedStatement checkUsernameun = con.prepareStatement(StringUtils.GET_USERNAME);
+			checkUsernameun.setString(1, userModel.getUserName());
+			
+			
+			try (ResultSet checkUsernameRs = checkUsernameun.executeQuery()){
+			if (checkUsernameRs.next() && checkUsernameRs.getInt(1) > 0) {
+				return -2; //Username already exists
+				}
+			}
 			u.setString (1, userModel.getFirstName());
 			u.setString (2, userModel.getLastName());
 			u.setString(3, userModel.getUserName());
@@ -30,9 +41,10 @@ public class DatabaseController {
 			u.setString(6, userModel.getPhoneNumber());
 			u.setString(7, userModel.getPassword());
 			u.setString(8, userModel.getConfirmPassword());
-			
+		
 			int result = u.executeUpdate();
-			return result > 0 ? 1 : 0;
+			return result > 0 ? 1 : 0;			
+				
 		} catch (SQLException | ClassNotFoundException e) {
 			e.printStackTrace();
 			return -1;

@@ -51,12 +51,13 @@ public class RegisterServlet extends HttpServlet {
 		
 		UserModel userModel = new UserModel(firstName, lastName, userName, email, address, phoneNumber, password, confirmPassword);
 		int result = dbController.addUser(userModel);
-		
-		if(result ==1) {
+		 System.out.println("result="+result);
+		 
+		if(result == 1) {
 			request.setAttribute(StringUtils.SUCCESS_MESSAGE, StringUtils.SUCCESS_REGISTER_MESSAGE);
-			response.sendRedirect(request.getContextPath() + "/pages/login.jsp");
+			response.sendRedirect(request.getContextPath() + StringUtils.LOGIN_PAGE);
 		}else if (result == 0) {
-			request.setAttribute(StringUtils.ERROR_MESSAGE, StringUtils.ERROR_MESSAGE);
+			request.setAttribute("errorMessage", StringUtils.ERROR_MESSAGE);
 			request.getRequestDispatcher(StringUtils.REGISTER_PAGE).forward(request, response);
 		}else {
 			request.setAttribute("errorMessage",StringUtils.SERVER_ERROR_MESSAGE);

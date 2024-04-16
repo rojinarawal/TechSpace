@@ -12,7 +12,7 @@
 
 <body>
     <section class="login">
-        <section class="sign-in_info">
+        <section>
             <h1>Sign in</h1>
             <div class="info">
                 <form action="#" class="info_container">
@@ -39,7 +39,7 @@
         </section>
         <section class="iamge">
             <div class="image_container">
-                <img src="../images/whitish.jpg" alt="TechSpace" class="image_container">
+                <img src="../stylesheets/images/whitish.jpg" alt="TechSpace" class="image_container">
             </div>
         </section>
     </section>

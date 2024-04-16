@@ -156,6 +156,8 @@ form .user-details .input-box{
 }
 
 .image-container img {
-  max-width: 100%;
+  max-width: 40px;
   height: auto;
+  display: flex;
+  justify-content: flex-end;
 }
