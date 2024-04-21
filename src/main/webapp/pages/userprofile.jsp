@@ -45,7 +45,7 @@
                                     </div>
                                     <div class="input-box">
                                         <span class="details">Last Name</span>
-                                        <input type="text" name="" placeholder="Enter your Last Name" required>
+                                        <input type="text" name="" placeholder="Enter your last name" required>
                                     </div>
                                 </div>
                                 <div class="as_info_one">

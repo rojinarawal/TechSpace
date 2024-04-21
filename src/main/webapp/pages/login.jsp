@@ -1,3 +1,4 @@
+<%@page import="util.StringUtils"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -13,17 +14,25 @@
 <body>
     <section class="login">
         <section>
+		<% 
+		String errorMessage = (String) request.getAttribute(StringUtils.ERROR_MESSAGE);
+		if(errorMessage != null && !errorMessage.isEmpty()){
+		%>
+		<p class="error-message"><%=errorMessage %></p>
+		<%
+		}
+		%>
             <h1>Sign in</h1>
             <div class="info">
-                <form action="#" class="info_container">
+                <form action="/TechSpace/LoginServlet" class="info_container">
                     <div class="user-details">
                         <div class="input-box">
                             <span class="details">Username</span>
-                            <input type="text" placeholder="Enter your Username" required>
+                            <input type="text"  name="user_name" placeholder="Enter your Username" required>
                         </div>
                         <div class="input-box">
                             <span class="details">Password</span>
-                            <input type="text" placeholder="Enter your password" required>
+                            <input type="text"  name="password" placeholder="Enter your password" required>
                             <span class="login-fp">Forgot Password?</span>
                         </div>
 

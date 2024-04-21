@@ -6,6 +6,7 @@ public static final String INSERT_USER = "INSERT INTO user_info "
 		+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
 	public static final String GET_ALL_USER_INFO = "SELECT * FROM user_info";
+	public static final String GET_LOGIN_USER_INFO = "SELECT * FROM user_info WHERE user_name = ? AND password = ?";
 	
 	public static final String FIRST_NAME="firstName";
 	public static final String LAST_NAME="lastName";
@@ -27,9 +28,9 @@ public static final String INSERT_USER = "INSERT INTO user_info "
 	
 	public static final String USERNAME_ERROR_MESSAGE="Username is already registered.";
 	public static final String EMAIL_ERROR_MESSAGE="Email is already registered.";
-	public static final String PHONE_NUMBER_ERROR_MESSAGE="Phone number is already registered.";
-	public static final String PASSWORD_UNMATCHED_ERROR_MESSAGE="Password is not matched.";
-	
+//	public static final String PHONE_NUMBER_ERROR_MESSAGE="Phone number is already registered.";
+//	public static final String PASSWORD_UNMATCHED_ERROR_MESSAGE="Password is not matched.";
+
 	//End messages
 
 	//Start JSP Route
@@ -45,8 +46,10 @@ public static final String INSERT_USER = "INSERT INTO user_info "
 	public static final String ERROR_REGISTER_MESSAGE = "Please correct the form data.";
 	
 	
-	public static final String GET_USERNAME = "SELECT COUNT(*) FROM user_info where user_name = ? ";
+	public static final String GET_USER_NAME = "SELECT COUNT(*) FROM user_info where user_name = ? ";
 	public static final String GET_PHONE = "SELECT COUNT(*) FROM user_info where phone_number = ? ";
 	public static final String GET_EMAIL = "SELECT COUNT(*) FROM user_info where email = ? ";
 
+	public static final String USER = "user";
+	public static final String JSESSIONID = "JSESSIONID";
 }

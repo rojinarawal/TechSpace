@@ -3,10 +3,12 @@
  */
 package model;
 
+import java.io.Serializable;
+
 /**
  * 
  */
-public class UserModel  {	
+public class UserModel implements Serializable  {	
 
 	/**
 	 * @param args
@@ -31,6 +33,10 @@ public class UserModel  {
 			this.password =  password;
 			this.confirmPassword = confirmPassword;
 			
+		}
+		
+		public UserModel() {
+			// TODO Auto-generated constructor stub
 		}
 		
 		public String getFirstName() {
