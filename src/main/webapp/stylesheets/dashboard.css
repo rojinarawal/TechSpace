@@ -1,0 +1,359 @@
+@charset "UTF-8";
+
+* {
+	margin: 0;
+	padding: 0;
+	border: none;
+	box-sizing: border-box;
+	font-family: sans-serif;
+}
+
+body {
+	display: flex;
+}
+
+.main {
+	margin-left: 90px;
+}
+
+.sidebar {
+	position: sticky;
+	top: 0;
+	bottom: 0;
+	width: 383px;
+	height: 100vh;
+	padding: auto;
+	background-color: #F1F6F9;
+}
+
+.logo {
+	height: 65px;
+	width: 289px;
+	margin-top: 32px;
+	margin-bottom: 32px;
+	margin-left: 48px;
+}
+
+.input-box {
+	width: 287px;
+	position: relative;
+	display: flex;
+	align-items: center;
+	/* Center align items vertically */
+	height: 56px;
+	margin-left: 48px;
+}
+
+.input-field {
+	flex: 1;
+	outline: 0;
+	border: none;
+	border-radius: 16px;
+	background-color: #E2E9ED;
+	font-size: 20px;
+	color: #394867;
+	padding-left: 40px;
+	/* Adjust for icon */
+	/* Decrease width */
+	width: 287px;
+	height: 56px;
+}
+
+.input-field::placeholder {
+	color: #394867;
+}
+
+.icon {
+	position: absolute;
+	left: 5px;
+	/* 5px padding */
+	top: 50%;
+	transform: translateY(-50%);
+	color: #394867;
+}
+
+.horizontal_line {
+	border-bottom: 1px solid #14274E;
+	/* Line style */
+	width: 313px;
+	/* Full width */
+	margin-left: 46px;
+	color: #14274E;
+	margin-top: 40px;
+	margin-bottom: 100px;
+	justify-content: center;
+}
+
+.menu ul li a {
+	display: flex;
+	align-items: center;
+}
+
+.menu ul li a img {
+	margin-right: 10px;
+	/* Adjust as needed */
+}
+
+.container {
+	width: 287px;
+	height: 488px;
+	position: relative;
+	list-style: none;
+	padding: 0;
+}
+
+.container li {
+	padding: 1rem;
+	margin: 32px 0;
+	border-radius: 8px;
+	transition: all 0.5s ease-in-out;
+	color: #14274E;
+}
+
+.container li span {
+	color: #14274E;
+}
+
+.container li a {
+	margin-left: 48px;
+}
+
+.container li:hover {
+	background-color: #14274E; /* Change background color on hover */
+	width: 100%;
+	color: white; /* Change text color on hover */
+}
+
+.container li:hover span {
+	color: white; /* Change text color to white on hover */
+}
+
+.container li:hover img {
+	filter: invert(100%); /* Invert the color of the icon on hover */
+}
+
+.container a {
+	font-size: 24px;
+	text-decoration: none;
+	display: flex;
+	align-items: center;
+	gap: 1.5xrem;
+}
+
+.container a span {
+	overflow: hidden;
+}
+
+.container a i {
+	font-size: 1.2rem;
+}
+
+.container li image {
+	margin-left: 5px;
+}
+
+.container li :active {
+	color: aliceblue;
+}
+
+.main-dashboard {
+	width: 100%;
+	height: 100%;
+}
+
+.dash-content {
+	width: 90%;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+h1 {
+	font-size: 48px;
+	font-weight: 500px;
+	color: #14274E;
+	margin-bottom: 82px;
+	margin-top: 48px;
+}
+
+.heading {
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 48px;
+}
+
+.heading1 {
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 48px;
+	margin-top: 94px;
+}
+
+.heading .subheading {
+	font-size: 32px;
+	color: #14274E;
+	font-weight: 500;
+}
+
+.heading1 .subheading {
+	font-size: 24px;
+	font-weight: 500px;
+	color: #14274E;
+}
+
+.btn {
+	border-radius: 16px;
+	/* Set border radius */
+	width: 149px;
+	/* Increase width */
+	padding: 10px 20px;
+	/* Adjust padding for better appearance */
+	background-color: #F1F6F9;
+	color: rgb(0, 0, 0);
+	/* White text color */
+	border: none;
+	/* Remove default border */
+	text-align: center;
+	/* Center text */
+	text-decoration: none;
+	/* Remove underline */
+	display: inline-block;
+	/* Display as inline-block for proper spacing */
+	font-size: 16px;
+	/* Font size */
+	margin: 4px 2px;
+	/* Add some margin */
+	cursor: pointer;
+	/* Add pointer cursor on hover */
+}
+
+.heading .subheading {
+	font-size: 32px;
+	font-weight: 500px;
+	color: #14274E;
+}
+
+.dash-content .boxes {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.dash-content .boxes .box {
+	padding: auto;
+	width: 316px;
+	height: 138px;
+	border-radius: 24px;
+	flex-direction: column;
+	padding: 30px 40px;
+}
+
+.box .text {
+	/*white-space: nowrap; */
+	font-size: 20px;
+	font-weight: 500;
+	color: #14274E;
+}
+
+.box .number {
+	font-size: 48px;
+	font-weight: 500;
+	color: #14274E;
+}
+
+.boxes .box.box1 {
+	background-color: #FDF6E1
+}
+
+.boxes .box.box4 {
+	background-color: #FDF6E1;
+}
+
+.boxes .box.box2 {
+	background-color: #E5ECFF;
+}
+
+.boxes .box.box3 {
+	background-color: #E5ECFF;
+}
+
+.box .percentage {
+	font-size: calc(20px + 7%);
+	color: #FFE38D;
+	font-weight: bold;
+}
+
+.box.box2 .percentage {
+	color: #A4BDFF; /* Red color for 6.1% */
+}
+
+.box.box3 .percentage {
+	color: #7DE7E3 /* Green color for 1.4% */
+}
+
+.box.box4 .percentage {
+	color: #EFACA1; /* Green color for 1.4% */
+}
+
+.dash-content .activity .activity-data {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	width: 100%;
+}
+
+.activity .activity-table {
+	width: 100%;
+	border-collapse: collapse; /* Collapse table borders */
+	margin-bottom: 40px;
+}
+
+.activity .activity-table th, .activity .activity-table td {
+	padding: 8px;
+	text-align: left;
+	border: none;
+	margin-top: 40px;
+}
+
+.activity .activity-table th {
+	background-color: #f2f2f2;
+	/* Light gray background for table headers */
+}
+
+.activity .activity-table tr:hover {
+	background-color: #f2f2f2; /* Light gray background on hover */
+}
+
+.activity.activity-data  td.data-list {
+	font-size: 20px;
+	font-weight: 400;
+	margin-top: 39px;
+	white-space: nowrap;
+}
+
+.data.status .data-list, .data.status .data-list1, .data.status .data-list2
+	{
+	font-size: 20px;
+	font-weight: 400;
+	margin-top: 39px;
+	white-space: nowrap;
+	width: 128px;
+}
+
+.activity-table .Completed {
+	background-color: #1D9F34;
+	color: white;
+	border-radius: 24px;
+}
+
+.activity-table .Pending {
+	background-color: #FFCC00;
+	color: white;
+	border-radius: 24px;
+}
+
+.activity-table .Cancelled {
+	background-color: #AC1616;
+	color: white;
+	border-radius: 24px;
+	padding: auto;
+}

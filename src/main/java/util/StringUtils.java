@@ -1,12 +1,17 @@
 package util;
 
+import java.io.File;
+
 public class StringUtils {
-public static final String INSERT_USER = "INSERT INTO user_info "
-		+ "(first_name, last_name, user_name, email, address,  phone_number, password, confirm_password) "
-		+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+	public static final String INSERT_USER = "INSERT INTO user_info "
+			+ "(first_name, last_name, user_name, email, address,  phone_number, password, role) "
+			+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
 	public static final String GET_ALL_USER_INFO = "SELECT * FROM user_info";
 	public static final String GET_LOGIN_USER_INFO = "SELECT * FROM user_info WHERE user_name = ? AND password = ?";
+	public static final String ADD_PRODUCT = "INSERT INTO products (productId, product_name, description, category, price, stock, image) VALUES (?, ?, ?, ?, ?, ?, ?)";
+	public static final String IMAGE_DIR_USER = "Users\\Acer\\eclipse-workspace\\TechSpace\\src\\main\\webapp\\resources\\images\\user\\";
+	public static final String IMAGE_DIR_SAVE_PATH = "C:" + File.separator + IMAGE_DIR_USER;
 	
 	public static final String FIRST_NAME="firstName";
 	public static final String LAST_NAME="lastName";
@@ -16,6 +21,13 @@ public static final String INSERT_USER = "INSERT INTO user_info "
 	public static final String PHONE_NUMBER="phoneNumber";
 	public static final String PASSWORD="password";
 	public static final String CONFIRM_PASSWORD="confirmPassword";
+	public static final String ROLE = "role";
+	
+	public static final String DEFAULT_ROLE = "User";
+	
+	public static boolean isNullOrEmpty(String str) {
+        return str == null || str.trim().isEmpty();
+    }
 
 	//Start message
 

@@ -1,0 +1,133 @@
+body, h1, table {
+	margin: 0;
+	padding: 0;
+	font-family: 'Arial', sans-serif;
+	background-color: whitesmoke;
+}
+
+.container {
+	display: flex;
+}
+
+.sidebar {
+	width: 200px;
+	background: #293949;
+	color: #fff;
+	height: 100vh;
+}
+
+.sidebar .logo {
+	padding: 20px;
+	background: #1A252F;
+	text-align: center;
+}
+
+.sidebar .menu {
+	padding: 20px;
+}
+
+.sidebar .menu input[type="search"] {
+	width: 100%;
+	padding: 10px;
+	margin-bottom: 20px;
+	background: #1A252F;
+	border: none;
+	color: #fff;
+}
+
+.sidebar .menu a {
+	text-decoration: none;
+	color: #fff;
+	display: block;
+	padding: 10px;
+	transition: background 0.3s;
+}
+
+.sidebar .menu a.active, .sidebar .menu a:hover {
+	background: #1A252F;
+}
+
+.main {
+	flex-grow: 1;
+	background: #f4f4f4;
+	padding: 20px;
+}
+
+.main h1 {
+	color: #14274e;
+	margin-bottom: 10px;
+}
+
+.order-header {
+	justify-content: space-between;
+	align-items: center;
+}
+
+.order-header h2 {
+	font-size: medium;
+	margin: 40px 0 25px;
+}
+
+.orderhistory-table {
+	width: 100%;
+	border-collapse: collapse;
+	background: #fff;
+}
+
+.orderhistory-table th, .orderhistory-table td {
+	padding: 10px;
+	text-align: left;
+}
+
+.orderhistory-table th {
+	background-color: #E2E9ED;
+}
+
+.orderhistory-table td {
+	font-size: 15px;
+}
+
+.status-pending {
+	display: inline-block;
+	color: #FFFFFF;
+	background-color: #FFCC00;
+	border-radius: 24px;
+	box-sizing: border-box;
+	margin: 10px;
+	width: 85px;
+}
+
+.status-delivered {
+	display: inline-block;
+	color: #FFFFFF;
+	background-color: #1D9F34;
+	border-radius: 24px;
+	box-sizing: border-box;
+	margin: 10px;
+}
+
+.status-cancelled {
+	display: inline-block;
+	color: #FFFFFF;
+	background-color: #AC1616;
+	border-radius: 24px;
+	box-sizing: border-box;
+	margin: 10px;
+}
+
+.numbers {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 20px 0;
+}
+
+.numbers-controls a {
+	text-decoration: none;
+	color: #9ba4b4;
+	margin: 0 5px;
+}
+
+.numbers-controls a:hover {
+	color: #14274E;
+}

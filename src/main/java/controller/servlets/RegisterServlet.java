@@ -19,6 +19,7 @@ public class RegisterServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	DatabaseController dbController = new DatabaseController();
+
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -47,9 +48,15 @@ public class RegisterServlet extends HttpServlet {
 		String address = request.getParameter(StringUtils.ADDRESS);
 		String phoneNumber = request.getParameter(StringUtils.PHONE_NUMBER);
 		String password = request.getParameter(StringUtils.PASSWORD);
-		String confirmPassword = request.getParameter(StringUtils.CONFIRM_PASSWORD);
+//		String confirmPassword = request.getParameter(StringUtils.CONFIRM_PASSWORD);
+		String userRole = request.getParameter(StringUtils.ROLE);
 		
-		UserModel userModel = new UserModel(firstName, lastName, userName, email, address, phoneNumber, password, confirmPassword);
+		// If userRole is null or empty, assign a default role of "User"
+	    if (StringUtils.isNullOrEmpty(userRole)) {
+	    	userRole = StringUtils.DEFAULT_ROLE;
+	    }
+		
+		UserModel userModel = new UserModel(firstName, lastName, userName, email, address, phoneNumber, password, userRole);
 		int result = dbController.addUser(userModel);
 		 System.out.println("result="+result);
 		 

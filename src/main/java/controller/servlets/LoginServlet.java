@@ -41,16 +41,43 @@ public class LoginServlet extends HttpServlet {
 		
 		if (loginResult == 1) {
 			
-			HttpSession userSession = request.getSession();
-			userSession.setAttribute("user_name", userName);
-			userSession.setMaxInactiveInterval(30*60);
+			String userRole = dbController.getRole(userName);
 			
-			Cookie userCookie= new Cookie("user", userName);
-			userCookie.setMaxAge(30*60);
-			response.addCookie(userCookie);
+            // Create a new session or get the existing session
+            HttpSession session = request.getSession(true);
+            // Set session timeout to 30 minutes (in seconds)
+            session.setMaxInactiveInterval(30 * 60);
+            
+            // Store user information in session attributes
+            session.setAttribute("user_name", userName);
+            session.setAttribute("role", userRole);
+            
+            // Store user information securely in cookies
+            Cookie userNameCookie = new Cookie("user_name", userName);
+            Cookie userRoleCookie = new Cookie("role", userRole);
+            
+            // Set cookie max age to match session timeout
+            userNameCookie.setMaxAge(30 * 60); // 30 minutes (in seconds)
+            userRoleCookie.setMaxAge(30 * 60); // 30 minutes (in seconds)
+            
+            // Add cookies to the response
+            response.addCookie(userNameCookie);
+            response.addCookie(userRoleCookie);
+
 			
-			request.setAttribute(StringUtils.SUCCESS_MESSAGE, StringUtils.SUCCESS_LOGIN_MESSAGE);
-			response.sendRedirect(request.getContextPath() + "/pages/home.jsp");
+            if (userRole.equals("Admin")) {
+                // Redirect admin to the admin dashboard
+                response.sendRedirect(request.getContextPath() + "/pages/dashboard.jsp");
+                
+            }else if (userRole.equals("User")) {
+                response.sendRedirect(request.getContextPath() + "/pages/home.jsp");
+                
+            } else {
+                request.setAttribute("errorMessage", "Invalid user role");
+                request.getRequestDispatcher(StringUtils.LOGIN_PAGE).forward(request, response);
+            }
+            
+			
 		}else if (loginResult == 0) {
 			request.setAttribute(StringUtils.ERROR_MESSAGE, StringUtils.LOGIN_ERROR_MESSAGE);
 			request.getRequestDispatcher(StringUtils.LOGIN_PAGE).forward(request, response);

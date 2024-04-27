@@ -11,6 +11,10 @@ import java.io.Serializable;
 public class UserModel implements Serializable  {	
 
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	/**
 	 * @param args
 	 */
 	
@@ -21,9 +25,10 @@ public class UserModel implements Serializable  {
 		private String address;
 		private String phoneNumber;
 		private String password;
-		private String confirmPassword;
+//		private String confirmPassword;
+		private String role; 
 		
-		public UserModel (String firstName, String lastName, String userName, String email, String address, String phoneNumber, String password, String confirmPassword) {
+		public UserModel (String firstName, String lastName, String userName, String email, String address, String phoneNumber, String password, String role) {
 			this.firstName = firstName;
 			this.lastName = lastName;
 			this.userName = userName;
@@ -31,7 +36,8 @@ public class UserModel implements Serializable  {
 			this.address = address;
 			this.phoneNumber = phoneNumber;
 			this.password =  password;
-			this.confirmPassword = confirmPassword;
+//			this.confirmPassword = confirmPassword;
+			this.role = role;
 			
 		}
 		
@@ -95,13 +101,21 @@ public class UserModel implements Serializable  {
 			this.password = password;
 		}
 
-		public String getConfirmPassword() {
-			return confirmPassword;
+		/*
+		 * public String getConfirmPassword() { return confirmPassword; }
+		 * 
+		 * public void setConfirmPassword(String confirmPassword) { this.confirmPassword
+		 * = confirmPassword; }
+		 */
+		
+		public String getRole() {
+			return role;
 		}
 
-		public void setConfirmPassword(String confirmPassword) {
-			this.confirmPassword = confirmPassword;
+		public void setRole(String role) {
+			this.role = role;
 		}
+
 		
 
 }
