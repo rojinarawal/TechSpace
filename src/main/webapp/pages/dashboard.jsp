@@ -47,7 +47,7 @@
 								alt="product"> <span>Product List</span>
 						</a></li>
 						<li><a
-							href="<%= request.getContextPath() %>/AdminLogoutServlet"> <%-- 	<a href="#"> <img src="<%=contextPath %>/stylesheets/images/message.svg" alt="message"> --%>
+							href="<%= request.getContextPath() %>/AdminLogoutServlet"> 
 								<!-- Replace with your SVG file --> <span>Log Out</span>
 						</a></li>
 						<li><a href="#"> <img

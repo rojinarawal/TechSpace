@@ -10,7 +10,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import controller.database.DatabaseController;
+import model.PasswordHashing;
 import util.StringUtils;
+import model.UserModel;
 
 /**
  * Servlet implementation class LoginServlet
@@ -26,18 +28,22 @@ public class LoginServlet extends HttpServlet {
      * @see HttpServlet#HttpServlet()
      */
     public LoginServlet() {
-        super();
+        this.dbController =new DatabaseController();
         // TODO Auto-generated constructor stub
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String userName = request.getParameter("user_name");
-		String password = request.getParameter("password");
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		String userName = request.getParameter(StringUtils.USER_NAME);
+		String password = request.getParameter(StringUtils.PASSWORD);
 		
-		int loginResult = dbController.getUserLoginInfo(userName, password);
+		// Create a LoginModel object to hold user credentials
+        UserModel userModel = new UserModel(userName, password);
+		
+		int loginResult = dbController.getUserLoginInfo(userModel);
 		
 		if (loginResult == 1) {
 			
@@ -49,11 +55,11 @@ public class LoginServlet extends HttpServlet {
             session.setMaxInactiveInterval(30 * 60);
             
             // Store user information in session attributes
-            session.setAttribute("user_name", userName);
+            session.setAttribute(StringUtils.USER_NAME, userName);
             session.setAttribute("role", userRole);
             
             // Store user information securely in cookies
-            Cookie userNameCookie = new Cookie("user_name", userName);
+            Cookie userNameCookie = new Cookie(StringUtils.USER, userName);
             Cookie userRoleCookie = new Cookie("role", userRole);
             
             // Set cookie max age to match session timeout
@@ -63,8 +69,8 @@ public class LoginServlet extends HttpServlet {
             // Add cookies to the response
             response.addCookie(userNameCookie);
             response.addCookie(userRoleCookie);
+            
 
-			
             if (userRole.equals("Admin")) {
                 // Redirect admin to the admin dashboard
                 response.sendRedirect(request.getContextPath() + "/pages/dashboard.jsp");
@@ -81,19 +87,15 @@ public class LoginServlet extends HttpServlet {
 		}else if (loginResult == 0) {
 			request.setAttribute(StringUtils.ERROR_MESSAGE, StringUtils.LOGIN_ERROR_MESSAGE);
 			request.getRequestDispatcher(StringUtils.LOGIN_PAGE).forward(request, response);
+		 } else if (loginResult == -1) {
+	            // Username not found
+	            request.setAttribute(StringUtils.MESSAGE_ERROR, StringUtils.MESSAGE_ERROR_CREATE_ACCOUNT);
+				request.setAttribute(StringUtils.USER_NAME, userName);
+	            request.getRequestDispatcher(StringUtils.LOGIN_PAGE).forward(request, response);
 		}else {
 			request.setAttribute("errorMessage",StringUtils.SERVER_ERROR_MESSAGE);
 			request.getRequestDispatcher(StringUtils.LOGIN_PAGE).forward(request, response);
 		}
 	}
-
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
-	}
-
+	
 }

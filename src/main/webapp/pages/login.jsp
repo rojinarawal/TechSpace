@@ -25,7 +25,7 @@
 		%>
 			<h1>Sign in</h1>
 			<div class="info">
-				<form action="/TechSpace/LoginServlet" class="info_container">
+				<form action="/TechSpace/LoginServlet" method="post" class="info_container">
 					<div class="user-details">
 						<div class="input-box">
 							<span class="details">Username</span> <input type="text"

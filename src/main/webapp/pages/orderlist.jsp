@@ -8,58 +8,9 @@
 <title>OrderList</title>
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/stylesheets/orderlist.css">
-<!-- <script src="https://kit.fontawesome.com/8abb2279ae.js" crossorigin="anonymous"></script> -->
 
 </head>
 <body>
-	<!-- <section>
-        <div class="sidebar">
-            <div class="menu">
-                <img class="logo" src="../images/logo.png" alt="logo">
-                <div class="input-box">
-                    <input type="text" placeholder="Search" class="input-field" autocomplete="off">
-                    <div class="icon">
-                        <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
-                    </div>
-                </div>
-                <div class="horizontal_line"></div>
-                <div class="container">
-                    <ul>
-                        <li class="active">
-                            <a href="#">
-                                <img src="../images/dashboard.png" alt="search icon"> 
-                                <span>Dashboard</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <img src="../images/order.png" alt="search icon"> 
-                                <span>Order List</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <img src="../images/productlist.png" alt="product">
-                                <span>Product List</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <img src="../images/message.png" alt="message"> 
-                                <span>Message</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <img src="../images/settings.png" alt="settings"> 
-                                <span>Settings</span>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section> -->
 
 	<div class="container">
 		<div class="sidebar">

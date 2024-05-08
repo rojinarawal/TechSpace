@@ -1,0 +1,321 @@
+@charset "UTF-8";
+
+.aboutus_herosection {
+    margin: 72px 120px 0px 120px;
+    display: flex;
+}
+
+
+.solidcontainer {
+    width: 285px;
+    height: 356px;
+    position: relative;
+    background-color: #14274E;
+}
+
+.aboutus_herosection_image {
+    width: 353px;
+    height: 376px;
+    position: absolute;
+    top: 120px;
+    left: 176px;
+}
+
+.aboutus_herosection_rightpart {
+    margin-left: 224px;
+    margin-right: 230px;
+}
+
+.ourstory_heading {
+    font-size: 48px;
+    font-weight: 600;
+    color: #14274E;
+    margin: 110px 0px 48px 0px;
+}
+
+.ourstory_paragraph {
+    font-size: 18px;
+    font-weight: 400;
+    color: #9BA4B4;
+}
+
+.aboutus_values {
+    margin-top: 146px;
+    width: 100%;
+    height: 475px;
+    background-color: #F4F6F9;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 72px;
+
+
+}
+
+.aboutus_values_heading {
+    font-size: 32px;
+    font-weight: 600;
+    color: #14274E;
+    margin: 0px 0px 48px 0px;
+    padding-top: 72px;
+}
+
+.aboutus_values_content {
+    display: flex;
+    justify-content: center;
+}
+
+.values {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 20px;
+    background-color: #fff;
+    width: 387px;
+    height: 332px;
+    margin: 0 20px;
+    border-radius: 24px;
+}
+
+.values_image {
+    width: 89px;
+    height: 85px;
+}
+
+.values_name {
+    font-size: 18px;
+    font-weight: 600;
+    color: #14274E;
+    margin: 16px 0px;
+    text-align: center;
+}
+
+.values_paragraph {
+    font-size: 18px;
+    font-weight: 400;
+    color: #9BA4B4;
+    margin: 0px 43px;
+    text-align: center;
+}
+
+.aboutus_team {
+    margin: 72px 120px 0px 120px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.team {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.aboutus_team_heading {
+    font-size: 32px;
+    font-weight: 600;
+    color: #14274E;
+    margin: 0px 0px 64px 0px;
+    text-align: center;
+}
+
+.team_content {
+    display: flex;
+    justify-content: center;
+}
+
+.aboutus_team_image {
+    width: 285px;
+    height: 285px;
+    border-radius: 225px;
+    align-items: center;
+    margin: 0px 20px 24px 20px;
+}
+
+.aboutus_team_name {
+    font-size: 20px;
+    font-weight: 600;
+    color: #14274E;
+    text-align: center;
+    padding-bottom: 8px;
+}
+
+.aboutus_team_roles {
+    font-size: 16px;
+    font-weight: 400;
+    color: #9BA4B4;
+    text-align: center;
+}
+
+.aboutus_contactus {
+    margin-top: 72px;
+    background-image: url("${pageContext.request.contextPath}/images/contactus_imagebackground.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100%;
+    height: 900px;
+    display: flex;
+    justify-content: space-between;
+
+}
+
+.aboutus_contactus_rightpart {
+    margin-right: 120px;
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    margin-top: 235px;
+
+}
+
+.aboutus_contactus_rightpart_heading {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 72px;
+}
+
+.aboutus_contactus_heading {
+    font-size: 48px;
+    font-weight: 700;
+    color: #14274E;
+    margin-bottom: 24px;
+    text-align: end;
+}
+
+.aboutus_contactus_subheading {
+    font-size: 18px;
+    font-weight: 400;
+    color: #9BA4B4;
+
+}
+
+.aboutus_contactus_rightpart_info {
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+
+}
+
+.aboutus_contactus_rightpart_info_align {
+    margin-bottom: 32px;
+}
+
+.aboutus_contactus_smallertextfield {
+    width: 285px;
+    height: 40px;
+    background-color: #D1D8E2;
+    padding: 8px;
+    border: none;
+    border-radius: 24px;
+    margin-left: 20px;
+
+}
+
+.aboutus_contactus_longertextfield {
+    width: 610px;
+    height: 170px;
+    background-color: #D1D8E2;
+    padding: 8px;
+    border: none;
+    border-radius: 24px;
+    margin-left: 20px;
+}
+
+.aboutus_contactus_leftpart {
+    display: flex;
+    flex-direction: column;
+    padding-left: 120px;
+    padding-top: 410px;
+
+
+}
+
+.aboutus_contactus_location {
+    display: flex;
+    flex-direction: column;
+}
+
+.aboutus_contactus_location_heading {
+    font-size: 20px;
+    font-weight: 600;
+    color: #14274E;
+    margin-bottom: 32px;
+}
+
+.aboutus_contactus_location_place {
+    font-size: 18px;
+    font-weight: 400;
+    color: #394867;
+    margin-bottom: 52px;
+}
+
+.aboutus_contactus_contactdetails_heading {
+    font-size: 20px;
+    font-weight: 600;
+    color: #14274E;
+}
+
+.aboutus_contactus_contactdetails_phoneemail {
+    display: flex;
+    margin-top: 32px;
+}
+
+.aboutus_contactus_contactdetails_phone {
+    display: flex;
+    flex-direction: column;
+    margin-right: 64px;
+}
+
+.aboutus_contactus_contactdetails_phone_heading {
+    font-size: 18px;
+    font-weight: 400;
+    color: #394867;
+}
+
+.aboutus_contactus_contactdetails_phone_number {
+    font-size: 18px;
+    font-weight: 400;
+    color: #394867;
+}
+
+.aboutus_contactus_contactdetails_email {
+    display: flex;
+    flex-direction: column;
+}
+
+.aboutus_contactus_contactdetails_email_heading {
+    font-size: 18px;
+    font-weight: 400;
+    color: #394867;
+}
+
+.aboutus_contactus_contactdetails_email_emailid {
+    font-size: 18px;
+    font-weight: 400;
+    color: #394867;
+}
+
+.aboutus_contactus_sendbutton {
+    border: 1px solid linear-gradient(to right, #9BA4B4, #34476F);
+    background-color: #F4F6F9;
+    border-radius: 24px;
+    color: #14274E;
+    font-size: 18px;
+    font-weight: 400;
+    padding: 14px 67px;
+
+    &:hover {
+        background: linear-gradient(to right, #9BA4B4, #34476F);
+        color: white;
+        border: none;
+    }
+
+}
+
+.aboutus_contactus_rightpart_form {
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+}

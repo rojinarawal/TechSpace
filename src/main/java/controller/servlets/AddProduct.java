@@ -52,15 +52,15 @@ public class AddProduct extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// Retrieve form data
-		int productId = Integer.parseInt(request.getParameter("productId"));
+		int productId = 0;
 		String productName = request.getParameter("product_name");
-		String description = request.getParameter("description");
 		String category = request.getParameter("category");
 		int price = Integer.parseInt(request.getParameter("price"));
 		int stock = Integer.parseInt(request.getParameter("stock"));
+		String description = request.getParameter("description");
 		Part imagePart = request.getPart("image");
 		
-		Product productModel = new Product(productId, productName, description, category, price, stock, imagePart);
+		Product productModel = new Product(productId, productName, category, price, stock, description, imagePart);
 
         // Call addProduct method of DatabaseController to add the product to the database
         int result = dbController.addProduct(productModel);
@@ -73,7 +73,7 @@ public class AddProduct extends HttpServlet {
 			// You can forward to an error page or display a message on the same page
 			// For example:
 			request.setAttribute("errorMessage", "Failed to add product.");
-			request.getRequestDispatcher("/AddProduct").forward(request, response);
+			request.getRequestDispatcher("/pages/productlist.jsp").forward(request, response);
 		}
 	}
 }

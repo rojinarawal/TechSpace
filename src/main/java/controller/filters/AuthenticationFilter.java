@@ -35,13 +35,13 @@ public class AuthenticationFilter implements Filter {
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse res = (HttpServletResponse) response;
-
+        HttpSession session = req.getSession(false); //retrieve the current session
         String uri = req.getRequestURI();
         System.out.println("Running filter in"+uri);
 
 
         // Allow access to CSS files
-        if (uri.endsWith(".css") || uri.endsWith("/productlist.jsp") || uri.endsWith("/AddProduct") || uri.endsWith(".jpg") || uri.endsWith(".jpeg") || uri.endsWith(".png") || uri.endsWith(".svg") ) {
+        if (uri.endsWith(".css") || uri.endsWith(".jpg") || uri.endsWith(".jpeg") || uri.endsWith(".png") || uri.endsWith(".svg") ) {
             chain.doFilter(request, response);
             return;
         }
@@ -52,9 +52,8 @@ public class AuthenticationFilter implements Filter {
         boolean isRegisterServlet = uri.endsWith("/RegisterServlet");
 		boolean isRegister = uri.endsWith("/signup.jsp");
 		boolean isLogoutServlet = uri.endsWith("/LogoutServlet");
+		 // Paths requiring admin access
 		
-        // Attempt to retrieve the current session
-        HttpSession session = req.getSession(false);
         boolean isLoggedIn = session != null && session.getAttribute("user_name") != null;
 
 
@@ -81,7 +80,7 @@ public class AuthenticationFilter implements Filter {
 	 * @see Filter#init(FilterConfig)
 	 */
 	public void init(FilterConfig fConfig) throws ServletException {
-		System.out.println("Filter Initialized");
+		System.out.println("Authentication Filter Initialized");
 	}
 
 }

@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import controller.database.DatabaseController;
 import model.UserModel;
 import util.StringUtils;
+import util.ValidationUtil;
 
 /**
  * Servlet implementation class RegisterServlet
@@ -48,7 +49,6 @@ public class RegisterServlet extends HttpServlet {
 		String address = request.getParameter(StringUtils.ADDRESS);
 		String phoneNumber = request.getParameter(StringUtils.PHONE_NUMBER);
 		String password = request.getParameter(StringUtils.PASSWORD);
-//		String confirmPassword = request.getParameter(StringUtils.CONFIRM_PASSWORD);
 		String userRole = request.getParameter(StringUtils.ROLE);
 		
 		// If userRole is null or empty, assign a default role of "User"
@@ -57,6 +57,17 @@ public class RegisterServlet extends HttpServlet {
 	    }
 		
 		UserModel userModel = new UserModel(firstName, lastName, userName, email, address, phoneNumber, password, userRole);
+		// Implement data validation here (e.g., check for empty fields, email format,
+				// etc.)
+				if(!ValidationUtil.isTextOnly(firstName) ||
+					!ValidationUtil.isTextOnly(lastName) ||
+					!ValidationUtil.isTextOnly(userName) ||
+					!ValidationUtil.isEmail(email) ||
+					!ValidationUtil.isTextOnly(address) ||
+					!ValidationUtil.isNumbersOnly(phoneNumber)){
+					request.setAttribute(StringUtils.MESSAGE_ERROR, StringUtils.MESSAGE_ERROR_INCORRECT_DATA);
+					request.getRequestDispatcher(StringUtils.REGISTER_PAGE).forward(request, response);
+				}
 		int result = dbController.addUser(userModel);
 		 System.out.println("result="+result);
 		 

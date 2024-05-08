@@ -28,10 +28,6 @@ public class AdminLogoutServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		 HttpSession session = request.getSession(false); // Get existing session if exists
-		    if (session != null) {
-		        session.invalidate(); // Invalidate the session
-		    }
 
 		    // Clear cookies
 		    Cookie[] cookies = request.getCookies();
@@ -41,9 +37,14 @@ public class AdminLogoutServlet extends HttpServlet {
 		            response.addCookie(cookie); // Add the cookie to the response to delete it
 		        }
 		    }
-
+		    
+		    HttpSession session = request.getSession(false); // Get existing session if exists
+		    if (session != null) {
+		        session.invalidate(); // Invalidate the session
+		    }
+		    
 		    // Redirect to login page or any other appropriate page
-		    response.sendRedirect(request.getContextPath() + "pages/login.jsp");
+		    response.sendRedirect(request.getContextPath() + "/pages/login.jsp");
 	}
 
 	/**

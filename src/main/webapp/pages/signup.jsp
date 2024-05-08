@@ -34,7 +34,7 @@
 								name="userName" placeholder="Username" required>
 						</div>
 						<div class="input-box">
-							<span class="details">Email</span> <input type="text"
+							<span class="details">Email</span> <input type="email"
 								name="email" placeholder="example@gmail.com" required>
 						</div>
 						<div class="input-box">
@@ -42,7 +42,7 @@
 								name="address" placeholder="Address" required>
 						</div>
 						<div class="input-box">
-							<span class="details">Phone Number</span> <input type="text"
+							<span class="details">Phone Number</span> <input type="number"
 								name="phoneNumber" placeholder="Number" required>
 						</div>
 						<div class="input-box">

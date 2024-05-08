@@ -18,39 +18,30 @@ public class Product implements Serializable {
 		//default constructor
 	}
 	
-	private int ProductID;
+	private int productID;
 	private String productname; 
-	private String description; 
 	private String category; 
 	private int price; 
 	private int stock;
-	private String imageUrlFromPart;
+	private String description; 
+	private String imageUrl;
 	
-	public Product(int ProductID, String productname, String description, String category, int price, int stock, Part imagePart) {
-		super();
-		this.ProductID = ProductID;
+	public Product(int productID, String productname, String category, int price, int stock,  String description, Part imagePart) {
+		this.productID =productID;
 		this.productname = productname;
+		this.category = category;
+		this.price = price;
+		this.stock = stock;
 		this.description = description;
-		this.category = category;
-		this.price = price;
-		this.stock = stock;
-		this.imageUrlFromPart = getImageUrl(imagePart);
+		this.imageUrl = getImageUrl(imagePart);
 	}
-	
-	public Product(int ProductID, String productname, String category, int price, int stock) {
-		super();
-		this.ProductID = ProductID;
-		this.productname = productname;
-		this.category = category;
-		this.price = price;
-		this.stock = stock;
-	}
+
 	
 	public int getProductID() {
-		return ProductID;
+		return productID;
 	}
 	public void setProductID(int ProductID) {
-		this.ProductID = ProductID;
+		this.productID = ProductID;
 	}
 	public String getProductname() {
 		return productname;
@@ -84,15 +75,15 @@ public class Product implements Serializable {
 	}
 
 	public String getImageUrlFromPart() {
-		return imageUrlFromPart;
+		return imageUrl;
 	}
 
 	public void setImageUrlFromPart(String imageUrlFromPart) {
-		this.imageUrlFromPart = imageUrlFromPart;
+		this.imageUrl = imageUrlFromPart;
 	}
 
 	public void setImageUrlFromDB(String imageUrl) {
-		this.imageUrlFromPart = imageUrl;
+		this.imageUrl = imageUrl;
 	}
 	private String getImageUrl(Part part) {
 		String savePath = StringUtils.IMAGE_DIR_SAVE_PATH;
