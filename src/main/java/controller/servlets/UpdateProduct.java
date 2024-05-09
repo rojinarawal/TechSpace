@@ -70,8 +70,8 @@ public class UpdateProduct extends HttpServlet {
 
 	            int result = dbController.updateProduct(product);
 	            if (result > 0) {
-	                request.setAttribute("registerMessage", "Successfully Updated");
-	                request.getRequestDispatcher("/pages/productlist.jsp").forward(request, response);
+	                request.setAttribute("registerMessage", "Product is successfully Updated");
+	                response.sendRedirect(request.getContextPath() + "/AddProduct");
 	            } else {
 	                request.setAttribute("registerMessage", "No changes made");
 	                request.getRequestDispatcher("/pages/productlist.jsp").forward(request, response);

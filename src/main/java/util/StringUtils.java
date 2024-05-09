@@ -3,8 +3,9 @@ package util;
 import java.io.File;
 
 public class StringUtils {
+	// SQL queries
 	public static final String INSERT_USER = "INSERT INTO user_info "
-			+ "(first_name, last_name, user_name, email, address,  phone_number, password, role) "
+			+ "(first_name, last_name, user_name, email, address, phone_number, password, role) "
 			+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
 	public static final String GET_ALL_USER_INFO = "SELECT * FROM user_info";
@@ -16,56 +17,94 @@ public class StringUtils {
 	public static final String UPDATE_PRODUCT = "UPDATE products SET product_name = ?, category = ?, price = ?, stock = ?, description = ?, image = ? WHERE productId = ?";
 	public static final String SELECT_PRODUCT_BY_ID = "SELECT productId, product_name, category, price, stock, description, image from products where productId =?";
 
-	public static final String FIRST_NAME="firstName";
-	public static final String LAST_NAME="lastName";
-	public static final String USER_NAME="user_name";
-	public static final String EMAIL="email";
-	public static final String ADDRESS="address";
-	public static final String PHONE_NUMBER="phoneNumber";
-	public static final String PASSWORD="password";
-	public static final String CONFIRM_PASSWORD="confirmPassword";
+	// Field names
+	public static final String FIRST_NAME = "firstName";
+	public static final String LAST_NAME = "lastName";
+	public static final String USER_NAME = "user_name";
+	public static final String USERNAME = "userName";
+	public static final String EMAIL = "email";
+	public static final String ADDRESS = "address";
+	public static final String PHONE_NUMBER = "phoneNumber";
+	public static final String PASSWORD = "password";
+	public static final String CONFIRM_PASSWORD = "confirmPassword";
 	public static final String ROLE = "role";
-	
+
+	// Default role
 	public static final String DEFAULT_ROLE = "User";
-	
+
+	/**
+	 * Checks if a string is null or empty.
+	 * @param str The string to check.
+	 * @return True if the string is null or empty, false otherwise.
+	 */
 	public static boolean isNullOrEmpty(String str) {
-        return str == null || str.trim().isEmpty();
-    }
+		return str == null || str.trim().isEmpty();
+	}
 
-	public static final String REGISTER_ERROR_MESSAGE="Please correct the form data.";
-	public static final String SERVER_ERROR_MESSAGE="An unexpected server error occurred.";
-	public static final String SUCCESS_MESSAGE="successMessage";
-	public static final String ERROR_MESSAGE="errorMessage";
-	public static final String LOGIN_ERROR_MESSAGE="Invalid credential.";
-	public static final String SUCCESS_LOGIN_MESSAGE="Login successful.";
-	
-	public static final String USERNAME_ERROR_MESSAGE="Username is already registered.";
-	public static final String EMAIL_ERROR_MESSAGE="Email is already registered.";
+	// Error messages
+	/**
+	 * Error messages for various scenarios.
+	 */
+	public static final String ERROR_MESSAGE = "errorMessage";
+	public static final String REGISTER_ERROR_MESSAGE = "Please correct the form data.";
+	public static final String SERVER_ERROR_MESSAGE = "An unexpected server error occurred.";
+	public static final String LOGIN_ERROR_MESSAGE = "Invalid credential.";
+	public static final String USERNAME_ERROR_MESSAGE = "Username is already registered.";
+	public static final String EMAIL_ERROR_MESSAGE = "Email is already registered.";
 	public static final String MESSAGE_ERROR_CREATE_ACCOUNT = "Account for this username is not registered! Please create a new account.";
+	public static final String MESSAGE_ERROR_INCORRECT_DATA = "Please correct all the fields.";
 
+	// Success messages
+	public static final String SUCCESS_MESSAGE = "successMessage";
+	public static final String SUCCESS_LOGIN_MESSAGE = "Login successful.";
+	public static final String SUCCESS_REGISTER_MESSAGE = "Successfully Registered.";
 
-	//Start JSP Route
+	// JSP Routes
 	public static final String LOGIN_PAGE = "/pages/login.jsp";
 	public static final String REGISTER_PAGE = "/pages/signup.jsp";
-	//End JSP Route
 
-	//Start Servlet Route
-	public static final String REGISTER_SERVLET="/RegisterServlet";
-	//End Servlet Route
+	// Servlet Routes
+	public static final String REGISTER_SERVLET = "/RegisterServlet";
 
-
-	public static final String SUCCESS_REGISTER_MESSAGE = "Successfully Registered.";
-	public static final String ERROR_REGISTER_MESSAGE = "Please correct the form data.";
-	
-	
+	// SQL queries for validation
 	public static final String GET_USER_NAME = "SELECT COUNT(*) FROM user_info where user_name = ? ";
 	public static final String GET_PHONE = "SELECT COUNT(*) FROM user_info where phone_number = ? ";
 	public static final String GET_EMAIL = "SELECT COUNT(*) FROM user_info where email = ? ";
 
+	// Session attributes
 	public static final String USER = "user";
 	public static final String JSESSIONID = "JSESSIONID";
+	
+	//Cart
+	public static final java.lang.String INSERT_CART_ID = "INSERT INTO cart (cartID, userID) VALUES (?,?)";
+	public static final java.lang.String DELETE_CART = "DELETE FROM cart_product where productId=? and cart_id=?";
+	public static final java.lang.String CART_ID = "SELECT cartID FROM cart WHERE user_name=?";
+	public static final java.lang.String ADD_TO_CART = "INSERT INTO cart (cartID, productId, quantity) VALUES (?, ?, ?) ON DUPLICATE KEY UPDATE quantity = VALUES(quantity)";
+	public static final java.lang.String GET_CART_PRODUCT_INFO = "SELECT p.productId,p.product_name,p.description,p.category,p.price,p.image,cp.quantity\nFROM cart_product cp JOIN products p ON cp.productId = p.productId JOIN cart c ON cp.cart_id = c.cart_id JOIN user_info u ON c.user_name = u.user_name\nWHERE  c.user_name = ?";
+	
+	//searchproduct
+	public static final String SEARCH_PRODUCT = "SELECT * FROM products WHERE product_name LIKE ? OR price LIKE ?";
 
-	public static final String MESSAGE_ERROR = "errorMessage";
-	public static final String MESSAGE_ERROR_INCORRECT_DATA = "Please correct all the fields.";
+	//orderlist
+	public static final String GET_ORDERS_INFO = "SELECT o.orderID, o.userID, o.orderDate, o.total_amount, o.order_status, u.user_name " +
+            "FROM order o " +
+            "JOIN user_info u ON o.userID = u.userID " +
+            "WHERE o.userID = ?";
 
+	public static final String FETCH_ORDER = "SELECT orderID, userID, orderDate, total_amount, order_status " +
+	        "FROM order " +
+	        "WHERE orderID = ?";
+	
+	public static final String FIND_USER = "SELECT userID, user_name " +
+	        "FROM user_info " +
+	        "WHERE userID = ?";
+	
+	public static final String FETCH_ORDER_ITEMS = "SELECT detailsID, productID, quantity " +
+	        "FROM order_details " +
+	        "WHERE orderID = ?";
+	
+	public static final String FIND_PRODUCT = "SELECT productID, product_name, price " +
+	        "FROM products " +
+	        "WHERE productID = ?";
+	
 }

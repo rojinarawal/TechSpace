@@ -7,6 +7,8 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/stylesheets/aboutus.css">
 <title>About Us</title>
 </head>
+
+<jsp:include page="header.jsp" />
 <body class="aboutus">
 	<section class="aboutus_herosection">
 		<div class="aboutus_herosection_leftpart">
@@ -148,6 +150,9 @@
 				</div>
 			</form>
 		</div>
+		
 	</section>
+	
+	<jsp:include page="footer.jsp" />
 </body>
 </html>

@@ -25,7 +25,9 @@ public class Product implements Serializable {
 	private int stock;
 	private String description; 
 	private String imageUrl;
-	
+	private boolean cartAvailable;
+
+
 	public Product(int productID, String productname, String category, int price, int stock,  String description, Part imagePart) {
 		this.productID =productID;
 		this.productname = productname;
@@ -103,6 +105,15 @@ public class Product implements Serializable {
 			imageUrlFromPart = "download.jpg";
 		}
 		return imageUrlFromPart;
+	}
+	
+	public boolean isCartAvailable() {
+		return cartAvailable;
+	}
+
+
+	public void setCartAvailable(boolean cartAvailable) {
+		this.cartAvailable = cartAvailable;
 	}
 
 }

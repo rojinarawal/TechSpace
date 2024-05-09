@@ -10,10 +10,14 @@ import java.util.ArrayList;
 
 import javax.servlet.http.Part;
 
+import com.mysql.cj.protocol.Resultset;
+
 import model.Order;
+import model.OrderDetails;
 import model.PasswordHashing;
 import model.Product;
 import model.UserModel;
+import model.cart;
 import util.StringUtils;
 
 public class DatabaseController implements Serializable {
@@ -32,37 +36,48 @@ public class DatabaseController implements Serializable {
 	}
 
 	public int addUser(UserModel userModel) {
-		try (Connection con = getConnection()) {
-			PreparedStatement u = con.prepareStatement(StringUtils.INSERT_USER);
+        try (Connection con = getConnection()) {
+            PreparedStatement u = con.prepareStatement(StringUtils.INSERT_USER);
 
-			// Check for existing username
-			PreparedStatement checkUserNameun = con.prepareStatement(StringUtils.GET_USER_NAME);
-			checkUserNameun.setString(1, userModel.getUserName());
+            // Check for existing username
+            con.setAutoCommit(false);
+            PreparedStatement checkUserNameun = con.prepareStatement(StringUtils.GET_USER_NAME);
+            checkUserNameun.setString(1, userModel.getUserName());
 
-			try (ResultSet checkUserNameRs = checkUserNameun.executeQuery()) {
-				if (checkUserNameRs.next() && checkUserNameRs.getInt(1) > 0) {
-					return -2; // UserName already exists
-				}
-			}
+            try (ResultSet checkUserNameRs = checkUserNameun.executeQuery()) {
+                if (checkUserNameRs.next() && checkUserNameRs.getInt(1) > 0) {
+                    return -2; // UserName already exists
+                }
+            }
 
-			// Set parameters for INSERT_USER statement
-			u.setString(1, userModel.getFirstName());
-			u.setString(2, userModel.getLastName());
-			u.setString(3, userModel.getUserName());
-			u.setString(4, userModel.getEmail());
-			u.setString(5, userModel.getAddress());
-			u.setString(6, userModel.getPhoneNumber());
-			u.setString(7, PasswordHashing.encrypt(userModel.getUserName(), userModel.getPassword()));
-			u.setString(8, userModel.getRole());
+            // Set parameters for INSERT_USER statement
+            u.setString(1, userModel.getFirstName());
+            u.setString(2, userModel.getLastName());
+            u.setString(3, userModel.getUserName());
+            u.setString(4, userModel.getEmail());
+            u.setString(5, userModel.getAddress());
+            u.setString(6, userModel.getPhoneNumber());
+            u.setString(7, PasswordHashing.encrypt(userModel.getUserName(), userModel.getPassword()));
+            u.setString(8, userModel.getRole());
 
-			int result = u.executeUpdate();
-			return result > 0 ? 1 : 0;
+            if (userModel.getRole().equals("user")) {
+                // Insert into the cart table
+                
+                PreparedStatement cartInsertStatement = con.prepareStatement(StringUtils.INSERT_CART_ID);
+                cartInsertStatement.setString(1, null);
+                cartInsertStatement.setString(2, userModel.getUserName());
+                cartInsertStatement.executeUpdate();
+            }
+            
+            int result = u.executeUpdate();
+            con.commit();
+            return result > 0 ? 1 : 0;
 
-		} catch (SQLException | ClassNotFoundException e) {
-			e.printStackTrace();
-			return -1;
-		}
-	}
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+            return -1;
+        }
+    }
 
 	public int getUserLoginInfo(UserModel userModel) {
 		try (Connection con = getConnection()) {
@@ -98,7 +113,37 @@ public class DatabaseController implements Serializable {
 			return -2;
 		}
 	}
-				
+	
+	public int getUserID(String userName){
+		try (Connection con = getConnection()) {
+			PreparedStatement st = con.prepareStatement("Select userID from user_info where user_name=?");
+			st.setString(1, userName);
+			ResultSet rs= st.executeQuery();
+			if(rs.next()) {
+				return rs.getInt("userID");
+			}else {
+				return 0;
+			}
+		}catch (SQLException | ClassNotFoundException ex) {
+			ex.printStackTrace();
+			return -1;
+		}	
+	}
+	public int getCartID(int userID){
+		try (Connection con = getConnection()) {
+			PreparedStatement st = con.prepareStatement("Select cartID from user_info where userID = ?");
+			st.setInt(1, userID);
+			ResultSet rs= st.executeQuery();
+			if(rs.next()) {
+				return rs.getInt("cartID");
+			}else {
+				return 0;
+			}
+		}catch (SQLException | ClassNotFoundException ex) {
+			ex.printStackTrace();
+			return -1;
+		}	
+	}
 
 	public ArrayList<UserModel> getAllUsersInfo() {
 		try {
@@ -231,49 +276,238 @@ public class DatabaseController implements Serializable {
 	
 
 	public int updateProduct(Product product) {
-	    try (Connection conn = getConnection();
-	         PreparedStatement statement = conn.prepareStatement(StringUtils.UPDATE_PRODUCT)) {
-	        statement.setString(1, product.getProductname());
-	        statement.setString(2, product.getCategory());
-	        statement.setInt(3, product.getPrice());
-	        statement.setInt(4, product.getStock());
-	        statement.setString(5, product.getDescription());
-	        statement.setString(6, product.getImageUrlFromPart()); 
-	        statement.setInt(7, product.getProductID());
-	        return statement.executeUpdate(); // This will return the number of rows affected
-	    } catch (SQLException e) {
-	        e.printStackTrace();
-	    } catch (ClassNotFoundException e1) {
+		try (Connection conn = getConnection();
+				PreparedStatement statement = conn.prepareStatement(StringUtils.UPDATE_PRODUCT)) {
+			statement.setString(1, product.getProductname());
+			statement.setString(2, product.getCategory());
+			statement.setInt(3, product.getPrice());
+			statement.setInt(4, product.getStock());
+			statement.setString(5, product.getDescription());
+			statement.setString(6, product.getImageUrlFromPart()); 
+			statement.setInt(7, product.getProductID());
+			return statement.executeUpdate(); // This will return the number of rows affected
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-	    return 0; // Return 0 to indicate no rows were updated due to an error
+		return 0; // Return 0 to indicate no rows were updated due to an error
 	}
 
-}
+	public Product getProductById(int productId) {
+	    Product product = null; // Initialize to null to handle the case where no product is found
+	    try {
+	        // Prepare the SQL statement to fetch a single product by its ID
+	        PreparedStatement st = getConnection().prepareStatement("SELECT * FROM products WHERE productId = ?");
+	        st.setInt(1, productId); // Set the product ID in the SQL query
 
-//	public int placeOrder(String query, Order orderModel) {
-//		Connection dbConnection = getConnection();
-//		if (dbConnection != null) {
-//			try {
-//
-//				PreparedStatement statement = dbConnection.prepareStatement(query);
-//				statement.setString(1, orderModel.getEmail());
-//				statement.setInt(2, orderModel.getProductName());
-//				statement.setDate(3, orderModel.getDate());
-//
-//				int result = statement.executeUpdate();
-//				if (result >= 0)
-//					return 1;
-//				else
-//					return 0;
-//			} catch (Exception e) {
-//				System.out.println(e.getMessage());
-//				return -2;
-//			}
-//		} else {
-//			return -3;
-//		}
-//	}
+	        // Execute the query
+	        ResultSet result = st.executeQuery();
 
+	        // Check if a product is found
+	        if (result.next()) {
+	            // Create a new Product object and populate it with data from the database
+	            product = new Product();
+	            product.setProductID(result.getInt("productId"));
+	            product.setProductname(result.getString("product_name"));
+	            product.setCategory(result.getString("category"));
+	            product.setPrice(result.getInt("price"));
+	            product.setStock(result.getInt("stock"));
+	            product.setDescription(result.getString("description"));
+	            product.setImageUrlFromDB(result.getString("image")); // Ensure your Product class has a method to set the image URL
+	        }
+	    } catch (SQLException | ClassNotFoundException ex) {
+	        ex.printStackTrace();
+	        // Optionally handle the exception by logging or throwing a custom exception
+	    }
+	    return product; // Return the product found, or null if no product was found or an error occurred
+	}
 	
+	public ArrayList<Product> getproductInfobySearch(String search) {
+        try {
+            PreparedStatement stmt = getConnection().prepareStatement(StringUtils.SEARCH_PRODUCT);
+            stmt.setString(1, search);
+            stmt.setString(2, search);
+            ResultSet result = stmt.executeQuery();
+
+            ArrayList<Product> searchproducts = new ArrayList<Product>();
+
+            while (result.next()) {
+                Product product = new Product();
+                product.setProductID(result.getInt("productId"));
+                product.setProductname(result.getString("product_name"));
+                product.setCategory(result.getString("category"));
+                product.setPrice(result.getInt("price"));
+                product.setStock(result.getInt("stock"));
+                product.setDescription(result.getString("description"));
+                product.setImageUrlFromDB(result.getString("image"));
+
+                searchproducts.add(product);
+            }
+
+            return searchproducts;
+        } catch (SQLException | ClassNotFoundException ex) {
+            ex.printStackTrace();
+            return null;
+        }
+    }
+	
+
+	public ArrayList<Product> getproductinfo(String user_name) {
+
+		try {
+
+			PreparedStatement stmt = getConnection().prepareStatement(StringUtils.GET_CART_PRODUCT_INFO);
+			stmt.setString(1, user_name);
+
+			ResultSet result = stmt.executeQuery();
+
+			ArrayList<Product> cartdetails = new ArrayList<Product>();
+			while (result.next()) {
+				Product product = new Product();
+				product.setProductID(result.getInt("productId"));
+				product.setProductname(result.getString("product_name"));
+				product.setDescription(result.getString("description"));
+				product.setPrice(result.getInt("price"));
+				product.setImageUrlFromDB(result.getString("images"));
+				product.setStock(result.getInt("quantity"));
+
+				cartdetails.add(product);
+			}
+			return cartdetails;
+		} catch (SQLException | ClassNotFoundException ex) {
+			ex.printStackTrace();
+			return null;
+		}
+	}
+
+
+
+	//remove cart item
+	public int deleteCartItem(int productId, int cart_id) {
+		try (Connection con = getConnection()) {
+			PreparedStatement st = con.prepareStatement(StringUtils.DELETE_CART);
+			st.setInt(1, productId);
+			st.setInt(2, cart_id);
+			return st.executeUpdate();
+		} catch (SQLException | ClassNotFoundException ex) {
+			ex.printStackTrace(); // Log the exception for debugging
+			return -1;
+		}
+	}
+
+	//cart
+
+	public int addcartitems(cart cart) {
+		try (Connection con = getConnection()) {
+			// Prepare the SQL statement using ON DUPLICATE KEY UPDATE
+			PreparedStatement st = con.prepareStatement(StringUtils.ADD_TO_CART);
+			st.setInt(1, cart.getCartId());
+			st.setInt(2, cart.getProductId());
+			st.setInt(3, cart.getQuantity());
+			
+			int result = st.executeUpdate(); // Insert, update, delete
+			return result > 0 ? 1 : 0;
+		} catch (SQLException ex) {
+			ex.printStackTrace();
+			return -1; // Handle SQL exception
+		} catch (ClassNotFoundException ex) {
+			ex.printStackTrace();
+			return -1; // Handle class not found exception
+		}
+	}
+
+	public int getcart_id(String user_name) {
+		try (Connection con = getConnection()) {
+			PreparedStatement st = con.prepareStatement(StringUtils.CART_ID);
+			st.setString(1, user_name);
+			ResultSet rs = st.executeQuery();
+
+			if (rs.next()) {
+				return rs.getInt("cart_id");
+			} else {
+				return 0;
+			}
+		} catch (SQLException | ClassNotFoundException ex) {
+			ex.printStackTrace();
+			return 0;
+		}
+	}
+
+	public ArrayList<Order> getOrdersinfo(int userID) {
+		ArrayList<Order> orders = new ArrayList<Order>();
+		try {
+			PreparedStatement st = getConnection().prepareStatement(StringUtils.GET_ORDERS_INFO);
+			st.setInt(1, userID);
+			ResultSet result = st.executeQuery();
+			while (result.next()) {
+				Order order = new Order();
+				order.setOrderID(result.getInt("orderID"));
+				order.setUserID(result.getInt("userID"));
+				order.setOrderDate(result.getDate("orderDate"));
+				order.setTotal_amount(result.getInt("total_amount"));
+				order.setOrder_status(result.getString("order_status"));		
+				order.setUserName(result.getString("user_name"));
+				orders.add(order);
+			}
+			return orders;
+		} catch (SQLException | ClassNotFoundException ex) {
+			ex.printStackTrace();
+			return orders;
+		}
+	}
+	
+	public Order fetchOrderDetails(int orderID) {
+        Order order = new Order();
+        try {
+            PreparedStatement st = getConnection().prepareStatement(StringUtils.FETCH_ORDER);
+            st.setInt(1, orderID);
+            ResultSet rs = st.executeQuery();
+
+            if (rs.next()) {
+                order.setOrderID(rs.getInt("orderID"));
+                order.setOrderDate(rs.getDate("orderDate"));
+                order.setTotal_amount(rs.getInt("total_amount"));
+                order.setOrder_status(rs.getString("order_status"));
+
+                PreparedStatement userQuery = getConnection().prepareStatement(StringUtils.FIND_USER);
+                userQuery.setInt(1, rs.getInt("userID"));
+                ResultSet userData = userQuery.executeQuery();
+
+                if (userData.next()) {
+                    order.setUserID(userData.getInt("userID"));
+                    order.setUserName(userData.getString("user_name"));
+                }
+
+                PreparedStatement st1 = getConnection().prepareStatement(StringUtils.FETCH_ORDER_ITEMS);
+                st1.setInt(1, rs.getInt("orderID"));
+                ResultSet itemsData = st1.executeQuery();
+
+                ArrayList<OrderDetails> itemsList = new ArrayList<OrderDetails>();
+                while (itemsData.next()) {
+                    OrderDetails item = new OrderDetails ();
+                    item.setDetailsID(itemsData.getInt("detailID"));
+                    item.setQuantity(itemsData.getInt("quantity"));
+
+                    PreparedStatement productQuery = getConnection().prepareStatement(StringUtils.FIND_PRODUCT);
+                    productQuery.setInt(1, itemsData.getInt("productID"));
+                    ResultSet productData = productQuery.executeQuery();
+
+                    if (productData.next()) {
+                        item.setProductID(productData.getInt("productID"));
+                        item.setProductname(productData.getString("name"));
+                        item.setPrice(productData.getInt("price"));
+                    }
+                    itemsList.add(item);
+                }
+
+                order.setOrderdetails(itemsList);
+            }
+            return order;
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+            return order;
+        }
+    }
+}

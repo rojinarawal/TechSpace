@@ -1,133 +1,164 @@
-body, h1, table {
-	margin: 0;
-	padding: 0;
-	font-family: 'Arial', sans-serif;
-	background-color: whitesmoke;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
 }
 
-.container {
-	display: flex;
+/* Body overflow control */
+body {
+    overflow-x: hidden; /* Prevents horizontal overflow */
 }
 
-.sidebar {
-	width: 200px;
-	background: #293949;
-	color: #fff;
-	height: 100vh;
+/* Main dashboard */
+.main-dashboard {
+    width: 100%;
+    padding: 20px; /* Add padding for spacing */
+    overflow-x: auto; /* Allow content to overflow horizontally if needed */
 }
 
-.sidebar .logo {
-	padding: 20px;
-	background: #1A252F;
-	text-align: center;
+.dash-content {
+    width: 100%; /* Ensure full width usage */
+    max-width: 1200px; /* Set a max-width for better layout */
+    margin-left: auto;
+    margin-right: auto;
 }
 
-.sidebar .menu {
-	padding: 20px;
+/* Headings */
+h1 {
+    font-size: 36px; /* Adjusted font size */
+    font-weight: 500;
+    color: #14274E;
+    margin-bottom: 24px; /* Adjusted margin */
 }
 
-.sidebar .menu input[type="search"] {
-	width: 100%;
-	padding: 10px;
-	margin-bottom: 20px;
-	background: #1A252F;
-	border: none;
-	color: #fff;
+.heading, .heading1 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center; /* Align items vertically */
+    margin-bottom: 24px; /* Adjusted margin */
 }
 
-.sidebar .menu a {
-	text-decoration: none;
-	color: #fff;
-	display: block;
-	padding: 10px;
-	transition: background 0.3s;
+.heading .subheading {
+    font-size: 24px; /* Adjusted font size */
+    font-weight: 500;
+    color: #14274E;
 }
 
-.sidebar .menu a.active, .sidebar .menu a:hover {
-	background: #1A252F;
+.heading1 .subheading {
+    font-size: 24px;
+    font-weight: 500;
+    color: #14274E;
 }
 
-.main {
-	flex-grow: 1;
-	background: #f4f4f4;
-	padding: 20px;
+/* Button styles */
+.btn {
+    border-radius: 16px;
+    width: 149px;
+    padding: 10px 20px;
+    background-color: #F1F6F9;
+    color: black;
+    border: none;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
 }
 
-.main h1 {
-	color: #14274e;
-	margin-bottom: 10px;
+/* Boxes styling */
+.boxes {
+    display: flex;
+    flex-wrap: wrap; /* Allow wrapping to prevent overflow */
+    gap: 42px; /* Gap between boxes */
+    margin-bottom: 40px;
 }
 
-.order-header {
-	justify-content: space-between;
-	align-items: center;
+.box {
+    flex: 1; /* Allow boxes to flex */
+    min-width: 200px; /* Set a minimum width */
+    max-width: 300px; /* Set a maximum width */
+    height: 138px;
+    border-radius: 24px;
+    padding: 30px 20px;
+    background-color: #E5ECFF;
 }
 
-.order-header h2 {
-	font-size: medium;
-	margin: 40px 0 25px;
+.box1, .box4 {
+    background-color: #FDF6E1;
 }
 
-.orderhistory-table {
-	width: 100%;
-	border-collapse: collapse;
-	background: #fff;
+.text {
+    font-size: 20px;
+    font-weight: 500;
+    color: #14274E;
 }
 
-.orderhistory-table th, .orderhistory-table td {
-	padding: 10px;
-	text-align: left;
+.number {
+    font-size: 36px; /* Adjusted font size */
+    font-weight: 500;
+    color: #14274E;
 }
 
-.orderhistory-table th {
-	background-color: #E2E9ED;
+.percentage {
+    font-size: 20px; /* Adjusted font size */
+    color: #FFE38D;
+    font-weight: bold;
 }
 
-.orderhistory-table td {
-	font-size: 15px;
+.box2 .percentage {
+    color: #A4BDFF;
 }
 
-.status-pending {
-	display: inline-block;
-	color: #FFFFFF;
-	background-color: #FFCC00;
-	border-radius: 24px;
-	box-sizing: border-box;
-	margin: 10px;
-	width: 85px;
+.box3 .percentage {
+    color: #7DE7E3;
 }
 
-.status-delivered {
-	display: inline-block;
-	color: #FFFFFF;
-	background-color: #1D9F34;
-	border-radius: 24px;
-	box-sizing: border-box;
-	margin: 10px;
+.box4 .percentage {
+    color: #EFACA1;
 }
 
-.status-cancelled {
-	display: inline-block;
-	color: #FFFFFF;
-	background-color: #AC1616;
-	border-radius: 24px;
-	box-sizing: border-box;
-	margin: 10px;
+/* Activity table styles */
+.activity {
+    margin-top: 24px;
 }
 
-.numbers {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	padding: 20px 0;
+.activity-table {
+    width: 100%;
+    border-collapse: collapse; /* Collapse table borders */
+    margin-bottom: 40px;
 }
 
-.numbers-controls a {
-	text-decoration: none;
-	color: #9ba4b4;
-	margin: 0 5px;
+.activity-table th, .activity-table td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd; /* Add a bottom border */
 }
 
-.numbers-controls a:hover {
-	color: #14274E;
+.activity-table th {
+    background-color: #f2f2f2; /* Light gray background for table headers */
+}
+
+.activity-table tr:hover {
+    background-color: #f2f2f2; /* Light gray background on hover */
+}
+
+.activity-table .status {
+    background-color: #1D9F34;
+    color: white;
+    border-radius: 16px;
+    padding: 4px 8px; /* Adjust padding */
+}
+.activity-table button {
+    padding: 5px 15px;
+    background-color: #4CAF50; /* A nice green color */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.activity-table button:hover {
+    background-color: #45a049; /* A slightly darker green for hover effect */
 }

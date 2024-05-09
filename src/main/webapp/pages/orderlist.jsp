@@ -1,134 +1,84 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>OrderList</title>
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/stylesheets/orderlist.css">
-
+    <meta charset="ISO-8859-1">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/stylesheets/orderlist.css">
 </head>
+
 <body>
 
-	<div class="container">
-		<div class="sidebar">
+    <jsp:include page="dashboard.jsp" />
+    
+    <!-- Main content -->
+    <section class="main-dashboard">
+        <div class="dash-content">
+            <h1>Overview</h1>
+            
+            <div class="overview">
+                <div class="heading">
+                    <span class="subheading">Analytics</span>
+                </div>
 
-			<div class="logo">TECH SPACE</div>
-			<div class="menu">
-				<input type="search" placeholder="Search" /> <a href="#">Dashboard</a>
-				<a href="#">Order List</a> <a href="#" class="active">Product
-					List</a> <a href="#">Messages</a> <a href="#">Settings</a>
-			</div>
-		</div>
+                <div class="boxes">
+                    <div class="box box1">
+                        <span class="text">Total Sales</span></br>
+                        <span class="number">2,230 </span>
+                    </div>
+                    <div class="box box2">
+                        <span class="text">Total Orders</span></br>
+                        <span class="number">1,672 </span>
+                    </div>
+                    <div class="box box4">
+                        <span class="text">Total customer</span></br>
+                        <span class="number">3,426 </span>
+                    </div>
+                </div>
+            </div>
 
-		<div class="main">
-			<h1>Order</h1>
-
-			<div class="order-header">
-				<span class="orderfound">15 Orders Found</span>
-				<h2>All Orders</h2>
-			</div>
-
-			<table class="orderhistory-table">
-				<thead>
-					<tr>
-						<th>Order ID</th>
-						<th>Order Date</th>
-						<th>Customer</th>
-						<th>Product</th>
-						<th>Quantity</th>
-						<th>Cost</th>
-						<th>Status</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<td>MM01</td>
-						<td>04-20-2024</td>
-						<td>John Doe</td>
-						<td>Macbook Air</td>
-						<td>2</td>
-						<td>Rs 120,000</td>
-						<td class="status-delivered">Delivered</td>
-					</tr>
-					<tr>
-						<td>MM02</td>
-						<td>04-25-2024</td>
-						<td>Jane Smith</td>
-						<td>Smartwatch</td>
-						<td>1</td>
-						<td>Rs 50,000</td>
-						<td class="status-pending">Pending</td>
-					</tr>
-
-					<tr>
-						<td>MM03</td>
-						<td>04-28-2024</td>
-						<td>Robert Johnson</td>
-						<td>Google Pixel 6</td>
-						<td>1</td>
-						<td>Rs 60,000</td>
-						<td class="status-cancelled">Cancelled</td>
-					</tr>
-
-					<tr>
-						<td>MM04</td>
-						<td>05-02-2024</td>
-						<td>Emily Brown</td>
-						<td>Apple Watch Series 7</td>
-						<td>1</td>
-						<td>Rs 45,000</td>
-						<td class="status-delivered">Delivered</td>
-					</tr>
-
-					<tr>
-						<td>MM05</td>
-						<td>05-05-2024</td>
-						<td>Michael Taylor</td>
-						<td>Samsung Galaxy Z Fold 3</td>
-						<td>1</td>
-						<td>Rs 150,000</td>
-						<td class="status-pending">Pending</td>
-					</tr>
-
-					<tr>
-						<td>MM06</td>
-						<td>05-08-2024</td>
-						<td>Sophia Wilson</td>
-						<td>Microsoft Surface Laptop 4</td>
-						<td>1</td>
-						<td>Rs 100,000</td>
-						<td class="status-cancelled">Cancelled</td>
-					</tr>
-
-					<tr>
-						<td>MM07</td>
-						<td>05-10-2024</td>
-						<td>Oliver Anderson</td>
-						<td>PlayStation 5</td>
-						<td>1</td>
-						<td>Rs 55,000</td>
-						<td class="status-delivered">Delivered</td>
-					</tr>
-				</tbody>
-
-			</table>
-
-			<div class="numbers">
-
-				<span>Showing 7 of 15 Orders</span>
-				<div class="numbers-controls">
-					<a href="#">&lt;</a> <a href="#">1</a> <a href="#">2</a> <a
-						href="#">3</a> <a href="#">4</a> <a href="#">&gt;</a>
-				</div>
-			</div>
-		</div>
-	</div>
-
-	</main>
-
-
+            <div class="heading1">
+                <span class="subheading">Latest Orders</span>
+            </div>
+            <div class="activity">
+                <table class="activity-table">
+                    <thead>
+                        <tr>
+                            <th>Order ID</th>
+                            <th>Order Date</th>
+                            <th>Customer</th>
+                            <th>Cost</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                            <tr>
+                                <td>${order.orderID}</td>
+                                <td>${order.orderDate}</td>
+                                <td>${order.userName}</td>
+                                <td>Rs ${order.cost}</td>
+                                <td>
+                                    <form id="status" action="" method="post">
+                                        <input type="hidden" name="orderID" value="${order.orderID}">
+                                        <select name="status" onchange="">
+                                            <option value="Pending" >Pending</option>
+                                            <option value="Completed" >Completed</option>
+                                            <option value="Cancelled">Cancelled</option>
+                                        </select>
+                                    </form>
+                                </td>
+                                <td>
+                                    <button>Save</button>
+                                </td>
+                            </tr>
+                      
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
 </body>
 </html>
+	

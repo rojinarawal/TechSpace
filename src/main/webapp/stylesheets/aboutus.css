@@ -154,10 +154,9 @@
     background-image: url("${pageContext.request.contextPath}/images/contactus_imagebackground.png");
     background-repeat: no-repeat;
     background-size: cover;
-    width: 100%;
-    height: 900px;
     display: flex;
     justify-content: space-between;
+    margin-bottom:30px;
 
 }
 
@@ -166,7 +165,7 @@
     display: flex;
     flex-direction: column;
     align-items: end;
-    margin-top: 235px;
+    margin-top: 50px;
 
 }
 
@@ -227,7 +226,7 @@
     display: flex;
     flex-direction: column;
     padding-left: 120px;
-    padding-top: 410px;
+    padding-top: 270px;
 
 
 }

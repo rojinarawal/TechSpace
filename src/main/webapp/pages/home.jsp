@@ -11,26 +11,7 @@
 
 </head>
 <body>
-
-	<section class="top">
-		<header>
-			<div class="brand">TECH SPACE</div>
-			<nav>
-				<ul class="navigation">
-					<li><a href="#home">HOME</a></li>
-					<li><a href="#shop">SHOP</a>
-						<div class="dropdown-content">
-							<a href="#category1">Category 1</a> <a href="#category2">Category
-								2</a> <a href="#category3">Category 3</a>
-						</div></li>
-					<li><a href="#about">ABOUT US</a></li>
-				</ul>
-			</nav>
-			<div class="header-icons">
-				<a href="#account"><span>👤</span></a> <a href="#favorites"><span>❤️</span></a>
-				<a href="#search"><span>🔍</span></a>
-			</div>
-		</header>
+	<jsp:include page="header.jsp" />
 		<div class="main-content">
 			<img
 				src="${pageContext.request.contextPath}/stylesheets/images/image 2.png"
@@ -56,34 +37,46 @@
 		<h2>SHOP BY CATEGORY</h2>
 		<div class="categories">
 			<div class="category">
+				<a href="product.jsp?category=smartphone" >
 				<img
 					src="${pageContext.request.contextPath}/stylesheets/images/Frame 703.png"
 					alt="Smartphones & Tablets">
+				</a>
 			</div>
 			<div class="category">
+				<a href="product.jsp?category=wearable" >
 				<img
 					src="${pageContext.request.contextPath}/stylesheets/images/Frame 705.png"
 					alt="Wearable Technology">
+				</a>
 			</div>
 			<div class="category">
-				<img
-					src="${pageContext.request.contextPath}/stylesheets/images/Frame 704.png"
-					alt="Laptops & Computers">
+				<a href="product.jsp?category=Laptops" >
+					<img
+						src="${pageContext.request.contextPath}/stylesheets/images/Frame 704.png"
+						alt="Laptops & Computers">
+				</a>
 			</div>
 			<div class="category">
-				<img
-					src="${pageContext.request.contextPath}/stylesheets/images/Frame 706.png"
-					alt="Audio Devices">
+				<a href="product.jsp?category=Audio" >
+					<img
+						src="${pageContext.request.contextPath}/stylesheets/images/Frame 706.png"
+						alt="Audio Devices">
+				</a>
 			</div>
 			<div class="category">
-				<img
-					src="${pageContext.request.contextPath}/stylesheets/images/Frame 707.png"
-					alt="Gaming">
+				<a href="product.jsp?category=Gamming" >
+					<img
+						src="${pageContext.request.contextPath}/stylesheets/images/Frame 707.png"
+						alt="Gaming">
+				</a>
 			</div>
-			<div class="category">
-				<img
-					src="${pageContext.request.contextPath}/stylesheets/images/Frame 708.png"
-					alt="Home Appliances">
+			<div class="category">	
+				<a href="product.jsp?category=Home appliance" >
+					<img
+						src="${pageContext.request.contextPath}/stylesheets/images/Frame 708.png"
+						alt="Home Appliances">
+				</a>
 			</div>
 		</div>
 	</section>
@@ -153,7 +146,7 @@
 				your digital lifestyle. From smartphones to smart home devices, our
 				curated selection offers quality products from top brands at
 				competitive prices.</p>
-			<button class="know-more-btn">Know More</button>
+			<a class="know-more-btn" href="${pageContext.request.contextPath}/pages/aboutus.jsp">Know More</a>
 		</div>
 	</section>
 
@@ -190,6 +183,7 @@
 			</div>
 		</div>
 	</section>
+<jsp:include page="footer.jsp" />
 
 </body>
 </html>

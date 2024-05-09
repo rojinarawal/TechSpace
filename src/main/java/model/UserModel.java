@@ -17,7 +17,7 @@ public class UserModel implements Serializable  {
 	/**
 	 * @param args
 	 */
-	
+		private int UserID;
 		private String firstName;
 		private String lastName;
 		private String userName;
@@ -38,6 +38,14 @@ public class UserModel implements Serializable  {
 			this.password =  password;
 //			this.confirmPassword = confirmPassword;
 			this.role = role;
+		}
+		
+		public int getUserID() {
+			return UserID;
+		}
+
+		public void setUserID(int userID) {
+			UserID = userID;
 		}
 		
 		public UserModel(String userName,String password) {

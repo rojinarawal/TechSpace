@@ -45,7 +45,7 @@ public class UserLogoutServlet extends HttpServlet {
         }
 
         // Redirect to login page or any other appropriate page
-        response.sendRedirect(request.getContextPath() + "pages/login.jsp");
+        response.sendRedirect(request.getContextPath() + "/pages/login.jsp");
     }
 
 	/**

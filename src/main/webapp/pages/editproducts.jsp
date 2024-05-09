@@ -61,53 +61,66 @@
                 <h2>Edit Product</h2>
             </div>
             <div class="modal-content">
-                <form id="editProductForm" action="/TechSpace/UpdateProduct"
-                    method="post" enctype="multipart/form-data">
-                   <div class="form-group">
-					     <label>Product ID</label>
-						<input type="text" name="productID" value="${product.productID}">	     
-					</div>
-					<div class="form-group">
-                        <label>Product Name</label> 
-                        <input type="text" name="productname" value="${product.productname}" required>
-                    </div>
+					<form id="editProductForm" action="/TechSpace/UpdateProduct"
+						method="post" enctype="multipart/form-data">
 						<div class="form-group">
-							<label>Category</label> 
-							<select name="category" required>
+							<label>Product ID</label> <input type="text" name="productID"
+								value="${product.productID}">
+						</div>
+						<div class="form-group">
+							<label>Product Name</label> <input type="text" name="productname"
+								value="${product.productname}" required>
+						</div>
+						<div class="form-group">
+							<label>Category</label> <select name="category" required>
 								<option value="">Select Category</option>
-								<option value="smartphones" ${product.category eq 'smartphones' ? 'selected' : ''}>Smartphones & Tablets</option>
-								<option value="wearable" ${product.category eq 'wearable' ? 'selected' : ''}>Wearable Technology</option>
-								<option value="laptops" ${product.category eq 'laptops' ? 'selected' : ''}>Laptops & Computers</option>
-								<option value="audio" ${product.category eq 'audio' ? 'selected' : ''}>Audio Devices</option>
-								<option value="gaming" ${product.category eq 'gaming' ? 'selected' : ''}>Gaming</option>
-								<option value="home_appliances" ${product.category eq 'home_appliances' ? 'selected' : ''}>Home Appliances</option>
+								<option value="smartphones"
+									${product.category eq 'smartphones' ? 'selected' : ''}>Smartphones
+									& Tablets</option>
+								<option value="wearable"
+									${product.category eq 'wearable' ? 'selected' : ''}>Wearable
+									Technology</option>
+								<option value="laptops"
+									${product.category eq 'laptops' ? 'selected' : ''}>Laptops
+									& Computers</option>
+								<option value="audio"
+									${product.category eq 'audio' ? 'selected' : ''}>Audio
+									Devices</option>
+								<option value="gaming"
+									${product.category eq 'gaming' ? 'selected' : ''}>Gaming</option>
+								<option value="home_appliances"
+									${product.category eq 'home_appliances' ? 'selected' : ''}>Home
+									Appliances</option>
 							</select>
 						</div>
 
 						<div class="form-group">
-                        <label>Price</label> 
-                        <input type="text" name="price" value="${product.price}" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Stock</label> 
-                        <input type="text" name="stock" value="${product.stock}" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Product Description</label>
-                        <textarea name="description" required>${product.description}</textarea>
-                    </div>
-                    <div class="form-group">
-                        <label>Product Image</label> 
-                        <input type="file" name="image">
-                         <img src="${pageContext.request.contextPath}/stylesheets/images/${product.imageUrlFromPart}">
-                    </div>
-                    <div class="form-group">
-                        <button type="submit" class="btn btn-primary">Save Product</button>
-                    </div>
-                </form>
-            </div>
+							<label>Price</label> <input type="text" name="price"
+								value="${product.price}" required>
+						</div>
+						<div class="form-group">
+							<label>Stock</label> <input type="text" name="stock"
+								value="${product.stock}" required>
+						</div>
+						<div class="form-group">
+							<label>Product Description</label>
+							<textarea name="description" required>${product.description}</textarea>
+						</div>
+						<div class="form-group">
+							<label>Product Image</label> <input type="file" name="image">
+							<img
+								src="${pageContext.request.contextPath}/stylesheets/images/${product.imageUrlFromPart}">
+						</div>
+						<div class="form-group">
+							<button type="submit" class="btn btn-primary">Save
+								Product</button>
+						</div>
+						
+					</form>
+				</div>
         </div>
     </div>
     </div>
+    
 </body>
 </html>

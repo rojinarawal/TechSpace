@@ -40,6 +40,7 @@ public class LoginServlet extends HttpServlet {
 		String userName = request.getParameter("user_name");
 		String password = request.getParameter("password");
 		
+		
 		// Create a LoginModel object to hold user credentials
         UserModel userModel = new UserModel(userName, password);
 		
@@ -55,8 +56,15 @@ public class LoginServlet extends HttpServlet {
             session.setMaxInactiveInterval(30 * 60);
             
             // Store user information in session attributes
+            int userID = dbController.getUserID(userName);
+            int cart_id = dbController.getCartID(userID);
+            if(userID > 0) {
+            	session.setAttribute("userID",userID);
+            }
             session.setAttribute(StringUtils.USER_NAME, userName);
             session.setAttribute("role", userRole);
+            session.setAttribute("cart_id", cart_id);
+            
             
             // Store user information securely in cookies
             Cookie userNameCookie = new Cookie(StringUtils.USER, userName);
@@ -73,7 +81,7 @@ public class LoginServlet extends HttpServlet {
 
             if (userRole.equals("Admin")) {
                 // Redirect admin to the admin dashboard
-                response.sendRedirect(request.getContextPath() + "/pages/dashboard.jsp");
+                response.sendRedirect(request.getContextPath() + "/pages/orderlist.jsp");
                 
             }else if (userRole.equals("User")) {
                 response.sendRedirect(request.getContextPath() + "/pages/home.jsp");
@@ -89,7 +97,7 @@ public class LoginServlet extends HttpServlet {
 			request.getRequestDispatcher(StringUtils.LOGIN_PAGE).forward(request, response);
 		 } else if (loginResult == -1) {
 	            // Username not found
-	            request.setAttribute(StringUtils.MESSAGE_ERROR, StringUtils.MESSAGE_ERROR_CREATE_ACCOUNT);
+	            request.setAttribute(StringUtils.ERROR_MESSAGE, StringUtils.MESSAGE_ERROR_CREATE_ACCOUNT);
 				request.setAttribute(StringUtils.USER_NAME, userName);
 	            request.getRequestDispatcher(StringUtils.LOGIN_PAGE).forward(request, response);
 		}else {
