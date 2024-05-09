@@ -6,7 +6,10 @@
 <meta charset="UTF-8">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/stylesheets/aboutus.css">
 <title>About Us</title>
+<script src="https://smtpjs.com/v3/smtp.js"></script>
+
 </head>
+
 
 <jsp:include page="header.jsp" />
 <body class="aboutus">
@@ -107,9 +110,9 @@
 					DETAILS</span>
 				<div class="aboutus_contactus_contactdetails_phoneemail">
 					<div class="aboutus_contactus_contactdetails_phone">
+					
 						<span class="aboutus_contactus_contactdetails_phone_heading">Phone</span>
 						<span class="aboutus_contactus_contactdetails_phone_number">+977-9803237789</span>
-						<span class="aboutus_contactus_contactdetails_phone_number">+977-9806438298</span>
 					</div>
 					<div class="aboutus_contactus_contactdetails_email">
 						<span class="aboutus_contactus_contactdetails_email_heading">Email</span>
@@ -127,32 +130,59 @@
 					class="aboutus_contactus_subheading">We are looking forward
 					to hearing from you soon!</span>
 			</div>
-			<form action="#" class="aboutus_contactus_rightpart_form">
-				<div class="aboutus_contactus_rightpart_info">
-					<div class="aboutus_contactus_rightpart_info_align">
-						<input type="text" class="aboutus_contactus_smallertextfield"
-							placeholder="NAME"> <input type="text"
-							class="aboutus_contactus_smallertextfield" placeholder="EMAIL">
-					</div>
-					<div class="aboutus_contactus_rightpart_info_align">
-						<input type="text" class="aboutus_contactus_smallertextfield"
-							placeholder="PHONE"> <input type="text"
-							class="aboutus_contactus_smallertextfield" placeholder="ADDRESS">
-					</div>
-					<div class="aboutus_contactus_rightpart_info_align">
-						<input type="textfield" class="aboutus_contactus_longertextfield"
-							placeholder="MESSAGE">
-					</div>
+            <form id="contactForm" class="aboutus_contactus_rightpart_form">
+                <div class="aboutus_contactus_rightpart_info">
+                    <div class="aboutus_contactus_rightpart_info_align">
+                        <input id="fname" type="text" class="aboutus_contactus_smallertextfield" placeholder="NAME">
+                        <input id="email" type="email" class="aboutus_contactus_smallertextfield" placeholder="EMAIL">
+                    </div>
+                    <div class="aboutus_contactus_rightpart_info_align">
+                        <input id="phone" type="text" class="aboutus_contactus_smallertextfield" placeholder="PHONE">
+                        <input id="address" type="text" class="aboutus_contactus_smallertextfield" placeholder="ADDRESS">
+                    </div>
+                    <div class="aboutus_contactus_rightpart_info_align">
+                        <textarea id="message" class="aboutus_contactus_longertextfield" placeholder="MESSAGE"></textarea>
+                    </div>
+                </div>
+                <div class="aboutus_contactus_button">
+                    <button type="submit" class="aboutus_contactus_sendbutton">SEND</button>
+                </div>
+            </form>
+        </div>
+    </section>
+    
+    <jsp:include page="footer.jsp" />
 
-				</div>
-				<div class="aboutus_contactus_button">
-					<button class="aboutus_contactus_sendbutton">SEND</button>
-				</div>
-			</form>
-		</div>
-		
-	</section>
-	
-	<jsp:include page="footer.jsp" />
+    
+<script>
+    document.getElementById('contactForm').addEventListener('submit', function(e) {
+        e.preventDefault();  // Prevent the default form submission
+
+        const fname = document.getElementById('fname').value;
+        const email = document.getElementById('email').value;
+        const phone = document.getElementById('phone').value;
+        const address = document.getElementById('address').value;
+        const message = document.getElementById('message').value;
+        
+        Email.send({
+            SecureToken: "F47B58A2392151048445F45C1E9423AF8F0F",
+            To: 'nirojacharya112@gmail.com',
+            From: "nirojacharya2424@gmail.com",
+            Subject: "New Contact Form Submission",
+            Body: `
+                <strong>Name:</strong> ${fname}<br>
+                <strong>Email:</strong> ${email}<br>
+                <strong>Phone:</strong> ${phone}<br>
+                <strong>Address:</strong> ${address}<br>
+                <strong>Message:</strong> ${message}
+            `
+        }).then(message => alert("Message and email successfully sent!"))
+        .catch(error => alert("Failed to send email: " + error));
+
+
+
+    });
+</script>
+
 </body>
 </html>

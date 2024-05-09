@@ -142,7 +142,7 @@
 					<a href="<%= request.getContextPath() %>/UserLogoutServlet"
 						class="navbar-icon"> Logout <i
 						class="fa-solid fa-right-from-bracket"></i>
-					</a> <a href="${pageContext.request.contextPath}/pages/userprofile.jsp"
+					</a> <a href="${pageContext.request.contextPath}/UserProfileServlet"
 						class="navbar-icon"> <i class="fa-solid fa-user"></i>
 					</a> <a href="#" class="navbar-icon"> <i
 						class="fa-solid fa-cart-shopping"></i>

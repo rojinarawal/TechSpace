@@ -25,7 +25,7 @@
 					With custom drivers, active noise</br> cancellation,and seamless Apple </br>integration,
 					elevate your audio experience</br> to new heights.
 				</p>
-				<button class="shop-now-btn">Shop Now</button>
+				<a href="${pageContext.request.contextPath}/ShowProductsServlet" class="shop-now-btn">Shop Now</a>
 
 			</div>
 			<img
@@ -37,91 +37,46 @@
 		<h2>SHOP BY CATEGORY</h2>
 		<div class="categories">
 			<div class="category">
-				<a href="product.jsp?category=smartphone" >
+				<a href="${pageContext.request.contextPath}/ShowProductsServlet?category=smartphone" >
 				<img
 					src="${pageContext.request.contextPath}/stylesheets/images/Frame 703.png"
 					alt="Smartphones & Tablets">
 				</a>
 			</div>
 			<div class="category">
-				<a href="product.jsp?category=wearable" >
+				<a href="${pageContext.request.contextPath}/ShowProductsServlet?category=wearable" >
 				<img
 					src="${pageContext.request.contextPath}/stylesheets/images/Frame 705.png"
 					alt="Wearable Technology">
 				</a>
 			</div>
 			<div class="category">
-				<a href="product.jsp?category=Laptops" >
+				<a href="${pageContext.request.contextPath}/ShowProductsServlet?category=laptops" >
 					<img
 						src="${pageContext.request.contextPath}/stylesheets/images/Frame 704.png"
 						alt="Laptops & Computers">
 				</a>
 			</div>
 			<div class="category">
-				<a href="product.jsp?category=Audio" >
+				<a href="${pageContext.request.contextPath}/ShowProductsServlet?category=audio" >
 					<img
 						src="${pageContext.request.contextPath}/stylesheets/images/Frame 706.png"
 						alt="Audio Devices">
 				</a>
 			</div>
 			<div class="category">
-				<a href="product.jsp?category=Gamming" >
+				<a href="${pageContext.request.contextPath}/ShowProductsServlet?category=gamming" >
 					<img
 						src="${pageContext.request.contextPath}/stylesheets/images/Frame 707.png"
 						alt="Gaming">
 				</a>
 			</div>
 			<div class="category">	
-				<a href="product.jsp?category=Home appliance" >
+				<a href="${pageContext.request.contextPath}/ShowProductsServlet?category=Home appliance" >
 					<img
 						src="${pageContext.request.contextPath}/stylesheets/images/Frame 708.png"
 						alt="Home Appliances">
 				</a>
-			</div>
-		</div>
-	</section>
-	<section class="best-sellers">
-		<h2>SHOP OUR BEST SELLERS</h2>
-		<div class="products">
-			<div class="product">
-				<div class="product-card">
-					<img
-						src="${pageContext.request.contextPath}/stylesheets/images/Frame 720.png"
-						alt="Samsung Galaxy S23 Ultra">
-					<button class="add-to-cart-btn">Add to Cart</button>
-				</div>
-				<h3>Samsung Galaxy S23 Ultra</h3>
-				<p class="price">Rs. 2,09,999</p>
-			</div>
-			<div class="product">
-				<div class="product-card">
-					<img
-						src="${pageContext.request.contextPath}/stylesheets/images//Frame 720 (1).png"
-						alt="Sony WH-1000XM4 Headphones">
-					<button class="add-to-cart-btn">Add to Cart</button>
-				</div>
-				<h3>Sony WH-1000XM4 Headphones</h3>
-				<p class="price">Rs. 40,000</p>
-			</div>
-			<div class="product">
-				<div class="product-card">
-					<img
-						src="${pageContext.request.contextPath}/stylesheets/images/Frame 722.png"
-						alt="Apple Watch Series 7">
-					<button class="add-to-cart-btn">Add to Cart</button>
-				</div>
-				<h3>Apple Watch Series 7</h3>
-				<p class="price">Rs. 70,000</p>
-			</div>
-			<div class="product">
-				<div class="product-card">
-					<img
-						src="${pageContext.request.contextPath}/stylesheets/images/Frame 721.png"
-						alt="Roomba i7+ Robot Vacuum">
-					<button class="add-to-cart-btn">Add to Cart</button>
-				</div>
-				<h3>Roomba i7+ Robot Vacuum</h3>
-				<p class="price">Rs. 1,50,000</p>
 			</div>
 		</div>
 	</section>

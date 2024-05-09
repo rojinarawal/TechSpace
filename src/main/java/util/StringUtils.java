@@ -79,7 +79,7 @@ public class StringUtils {
 	public static final java.lang.String INSERT_CART_ID = "INSERT INTO cart (cartID, userID) VALUES (?,?)";
 	public static final java.lang.String DELETE_CART = "DELETE FROM cart_product where productId=? and cart_id=?";
 	public static final java.lang.String CART_ID = "SELECT cartID FROM cart WHERE user_name=?";
-	public static final java.lang.String ADD_TO_CART = "INSERT INTO cart (cartID, productId, quantity) VALUES (?, ?, ?) ON DUPLICATE KEY UPDATE quantity = VALUES(quantity)";
+	public static final java.lang.String ADD_TO_CART = "INSERT INTO cart_item (cartID, productID, quantity) VALUES (?, ?, ?)";
 	public static final java.lang.String GET_CART_PRODUCT_INFO = "SELECT p.productId,p.product_name,p.description,p.category,p.price,p.image,cp.quantity\nFROM cart_product cp JOIN products p ON cp.productId = p.productId JOIN cart c ON cp.cart_id = c.cart_id JOIN user_info u ON c.user_name = u.user_name\nWHERE  c.user_name = ?";
 	
 	//searchproduct

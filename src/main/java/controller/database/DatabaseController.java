@@ -131,7 +131,7 @@ public class DatabaseController implements Serializable {
 	}
 	public int getCartID(int userID){
 		try (Connection con = getConnection()) {
-			PreparedStatement st = con.prepareStatement("Select cartID from user_info where userID = ?");
+			PreparedStatement st = con.prepareStatement("Select cartID from cart where userID = ?");
 			st.setInt(1, userID);
 			ResultSet rs= st.executeQuery();
 			if(rs.next()) {
@@ -510,4 +510,64 @@ public class DatabaseController implements Serializable {
             return order;
         }
     }
-}
+
+	
+	public int updateUserProfile(UserModel user) throws SQLException, ClassNotFoundException {
+	    try (Connection conn = getConnection()){
+		         // Step 2: Create a PreparedStatement using the query string
+		         PreparedStatement preparedStatement = conn.prepareStatement(" Update user_info set user_name=?,first_name=?, last_name=?, email=?, address=?, phone_number=? where userId =?"); {
+	    			preparedStatement.setString(1, user.getUserName());
+	    			preparedStatement.setString(2, user.getFirstName());
+	    			preparedStatement.setString(3, user.getLastName());
+	    			preparedStatement.setString(4, user.getEmail());
+	    			preparedStatement.setString(5, user.getAddress());
+	    			preparedStatement.setString(6, user.getPhoneNumber());
+	    			preparedStatement.setInt(7, user.getUserID());
+
+	    			int res = preparedStatement.executeUpdate();
+	    			
+	    			return res;
+	    			
+		        }}
+		         catch (SQLException | ClassNotFoundException e) {
+		 	        e.printStackTrace(); // Handle the exception appropriately
+		 	        
+		 	    }
+		return 0;
+	    			
+	    }
+		   
+	public ArrayList<UserModel> getSpecificUser(String userName) throws ClassNotFoundException, SQLException {
+		Connection con = getConnection();
+		PreparedStatement stmt = con.prepareStatement("SELECT * FROM user_info where user_name = ?");
+		stmt.setString(1, userName);
+		
+		ArrayList<UserModel> users = new ArrayList<UserModel>();
+		
+		ResultSet result = stmt.executeQuery();
+
+		
+		
+	
+			while (result.next()) {
+				UserModel user = new UserModel();
+
+				user.setUserID(result.getInt("userID"));
+				user.setFirstName(result.getString("first_name"));
+				user.setLastName(result.getString("last_name"));
+				user.setUserName(result.getString("user_name"));
+				user.setEmail(result.getString("email"));
+				user.setAddress(result.getString("address"));
+				user.setPhoneNumber(result.getString("phone_number"));
+				user.setPassword(result.getString("password"));
+				user.setRole(result.getString("role"));
+				users.add(user);
+
+			}
+			System.out.println(users);
+		return users;
+		
+	}
+	}
+
+
