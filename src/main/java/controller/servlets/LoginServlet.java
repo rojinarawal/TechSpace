@@ -37,8 +37,8 @@ public class LoginServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String userName = request.getParameter(StringUtils.USER_NAME);
-		String password = request.getParameter(StringUtils.PASSWORD);
+		String userName = request.getParameter("user_name");
+		String password = request.getParameter("password");
 		
 		// Create a LoginModel object to hold user credentials
         UserModel userModel = new UserModel(userName, password);

@@ -35,54 +35,52 @@ public class RegisterServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		request.getRequestDispatcher("/pages/signup.jsp").forward(request, response);
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String firstName = request.getParameter(StringUtils.FIRST_NAME);
-		String lastName = request.getParameter(StringUtils.LAST_NAME);
-		String userName = request.getParameter(StringUtils.USER_NAME);
-		String email = request.getParameter(StringUtils.EMAIL);
-		String address = request.getParameter(StringUtils.ADDRESS);
-		String phoneNumber = request.getParameter(StringUtils.PHONE_NUMBER);
-		String password = request.getParameter(StringUtils.PASSWORD);
-		String userRole = request.getParameter(StringUtils.ROLE);
-		
-		// If userRole is null or empty, assign a default role of "User"
+	    String firstName = request.getParameter(StringUtils.FIRST_NAME);
+	    String lastName = request.getParameter(StringUtils.LAST_NAME);
+	    String userName = request.getParameter("userName");
+	    String email = request.getParameter(StringUtils.EMAIL);
+	    String address = request.getParameter(StringUtils.ADDRESS);
+	    String phoneNumber = request.getParameter(StringUtils.PHONE_NUMBER);
+	    String password = request.getParameter(StringUtils.PASSWORD);
+	    String userRole = request.getParameter(StringUtils.ROLE);
+
+	    // If userRole is null or empty, assign a default role of "User"
 	    if (StringUtils.isNullOrEmpty(userRole)) {
-	    	userRole = StringUtils.DEFAULT_ROLE;
+	        userRole = StringUtils.DEFAULT_ROLE;
 	    }
-		
-		UserModel userModel = new UserModel(firstName, lastName, userName, email, address, phoneNumber, password, userRole);
-		// Implement data validation here (e.g., check for empty fields, email format,
-				// etc.)
-				if(!ValidationUtil.isTextOnly(firstName) ||
-					!ValidationUtil.isTextOnly(lastName) ||
-					!ValidationUtil.isTextOnly(userName) ||
-					!ValidationUtil.isEmail(email) ||
-					!ValidationUtil.isTextOnly(address) ||
-					!ValidationUtil.isNumbersOnly(phoneNumber)){
-					request.setAttribute(StringUtils.MESSAGE_ERROR, StringUtils.MESSAGE_ERROR_INCORRECT_DATA);
-					request.getRequestDispatcher(StringUtils.REGISTER_PAGE).forward(request, response);
-				}
-		int result = dbController.addUser(userModel);
-		 System.out.println("result="+result);
-		 
-		if(result == 1) {
-			request.setAttribute(StringUtils.SUCCESS_MESSAGE, StringUtils.SUCCESS_REGISTER_MESSAGE);
-			response.sendRedirect(request.getContextPath() + StringUtils.LOGIN_PAGE);
-		}else if (result == 0) {
-			request.setAttribute("errorMessage", StringUtils.ERROR_MESSAGE);
-			request.getRequestDispatcher(StringUtils.REGISTER_PAGE).forward(request, response);
-		}else {
-			request.setAttribute("errorMessage",StringUtils.SERVER_ERROR_MESSAGE);
-			request.getRequestDispatcher(StringUtils.REGISTER_PAGE).forward(request, response);
-		}
-		
+
+	    UserModel userModel = new UserModel(firstName, lastName, userName, email, address, phoneNumber, password, userRole);
+	    // Implement data validation here (e.g., check for empty fields, email format,
+	    // etc.)
+	    if (!ValidationUtil.isTextOnly(firstName) ||
+	            !ValidationUtil.isTextOnly(lastName) ||
+	            !ValidationUtil.isTextOnly(userName) ||
+	            !ValidationUtil.isEmail(email) ||
+	            !ValidationUtil.isTextOnly(address) ||
+	            !ValidationUtil.isNumbersOnly(phoneNumber)) {
+	        request.setAttribute("errorMessage", StringUtils.MESSAGE_ERROR_INCORRECT_DATA);
+	        request.getRequestDispatcher("/pages/signup.jsp").forward(request, response);
+	    } else {
+	        int result = dbController.addUser(userModel);
+	        System.out.println("result=" + result);
+
+	        if (result == 1) {
+	            request.setAttribute(StringUtils.SUCCESS_MESSAGE, StringUtils.SUCCESS_REGISTER_MESSAGE);
+	            request.getRequestDispatcher(StringUtils.LOGIN_PAGE).forward(request, response);
+	        } else if (result == 0) {
+	            request.setAttribute("errorMessage", StringUtils.ERROR_MESSAGE);
+	            request.getRequestDispatcher("/pages/signup.jsp").forward(request, response);
+	        } else {
+	            request.setAttribute("errorMessage", StringUtils.SERVER_ERROR_MESSAGE);
+	            request.getRequestDispatcher("/pages/signup.jsp").forward(request, response);
+	        }
+	    }
 	}
 }
-
-

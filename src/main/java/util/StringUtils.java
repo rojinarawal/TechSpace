@@ -18,7 +18,7 @@ public class StringUtils {
 
 	public static final String FIRST_NAME="firstName";
 	public static final String LAST_NAME="lastName";
-	public static final String USER_NAME="userName";
+	public static final String USER_NAME="user_name";
 	public static final String EMAIL="email";
 	public static final String ADDRESS="address";
 	public static final String PHONE_NUMBER="phoneNumber";

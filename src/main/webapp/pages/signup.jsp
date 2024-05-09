@@ -14,7 +14,7 @@
 
 <body>
 	<section>
-
+	<div>${errorMessage}</div>
 
 		<div class="container">
 			<div class="title">Sign Up</div>

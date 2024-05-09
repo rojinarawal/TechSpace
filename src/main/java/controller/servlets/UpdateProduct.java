@@ -2,6 +2,7 @@ package controller.servlets;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -16,6 +17,9 @@ import util.StringUtils;
  * Servlet implementation class UpdateProduct
  */
 @WebServlet("/UpdateProduct")
+@MultipartConfig(fileSizeThreshold = 1024 * 1024 * 2, // 2MB
+maxFileSize = 1024 * 1024 * 10,    // 10MB
+maxRequestSize = 1024 * 1024 * 50)
 public class UpdateProduct extends HttpServlet {
 	private static final long serialVersionUID = 1L;
       
@@ -51,21 +55,16 @@ public class UpdateProduct extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		 try {
-			 System.out.println("Received productID: " + request.getParameter("productId"));
-			 System.out.println("Received price: " + request.getParameter("price"));
-			 System.out.println("Received stock: " + request.getParameter("stock"));
-			 System.out.println("Received img: " + request.getParameter("image"));
-			 System.out.println("Received name: " + request.getParameter("productName"));
-			 System.out.println("Received desc: " + request.getParameter("description"));
-			 System.out.println("Received cat: " + request.getParameter("category"));
 			
-	            int productID = Integer.parseInt(request.getParameter("productId"));
-	            String productName = request.getParameter("productName");
+	            int productID = Integer.parseInt(request.getParameter("productID"));
+	            String productName = request.getParameter("productname");
 	            String category = request.getParameter("category");
 	            int price = Integer.parseInt(request.getParameter("price"));
 	            int stock = Integer.parseInt(request.getParameter("stock"));
 	            String description = request.getParameter("description");
 	            Part imagePart = request.getPart("image");
+	            
+	           
 
 	            Product product = new Product(productID, productName, category, price, stock, description, imagePart);
 

@@ -61,15 +61,15 @@
                 <h2>Edit Product</h2>
             </div>
             <div class="modal-content">
-                <form id="editProductForm" action="${pageContext.request.contextPath}/UpdateProduct?productID=${product.productID}"
+                <form id="editProductForm" action="/TechSpace/UpdateProduct"
                     method="post" enctype="multipart/form-data">
                    <div class="form-group">
 					     <label>Product ID</label>
-						<input type="text" name="productId" value="${product.productID}" readonly>	     
+						<input type="text" name="productID" value="${product.productID}">	     
 					</div>
 					<div class="form-group">
                         <label>Product Name</label> 
-                        <input type="text" name="productName" value="${product.productname}" required>
+                        <input type="text" name="productname" value="${product.productname}" required>
                     </div>
 						<div class="form-group">
 							<label>Category</label> 
