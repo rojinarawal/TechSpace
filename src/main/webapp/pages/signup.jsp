@@ -14,7 +14,7 @@
 
 <body>
 	<section>
-	<div>${errorMessage}</div>
+		<div>${errorMessage}</div>
 
 		<div class="container">
 			<div class="title">Sign Up</div>
@@ -30,7 +30,7 @@
 								name="lastName" placeholder="Last Name" required>
 						</div>
 						<div class="input-box">
-							<span class="details">User Name</span> <input type="text"
+							<span class="details">User Name</span> <input 
 								name="userName" placeholder="Username" required>
 						</div>
 						<div class="input-box">
@@ -38,7 +38,7 @@
 								name="email" placeholder="example@gmail.com" required>
 						</div>
 						<div class="input-box">
-							<span class="details">Address</span> <input type="text"
+							<span class="details">Address</span> <input 
 								name="address" placeholder="Address" required>
 						</div>
 						<div class="input-box">

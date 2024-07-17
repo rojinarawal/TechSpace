@@ -17,7 +17,8 @@ import controller.database.DatabaseController;
 import model.UserModel;
 
 /**
- * Servlet implementation class UserProfileServelet
+ * Servlet implementation class UserProfileServlet
+ * Handles display of user profile information.
  */
 @WebServlet(asyncSupported = true, urlPatterns = { "/UserProfileServlet" })
 public class UserProfileServlet extends HttpServlet {
@@ -25,65 +26,64 @@ public class UserProfileServlet extends HttpServlet {
 
 	private DatabaseController dbController;
 
-
+	/**
+	 * Default constructor. Initializes the servlet.
+	 */
 	public UserProfileServlet() {
 		super();
-		// TODO Auto-generated constructor stub
-	}
-
-	@Override
-	public void init() throws ServletException {
-		// TODO Auto-generated method stub
-		dbController = new DatabaseController();
-		super.init();
-
-
 	}
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * Initializes the servlet and its database controller.
+	 */
+	@Override
+	public void init() throws ServletException {
+		dbController = new DatabaseController();
+		super.init();
+	}
+
+	/**
+	 * Handles the GET request by retrieving user profile details based on the username stored in cookies.
+	 * The profile information is then forwarded to a JSP page for display.
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		// Append the servlet context path to the response for debugging purposes.
 		response.getWriter().append("Served at: ").append(request.getContextPath());
-		//ArrayList<UserModel> user = dbController.getAllUsersInfo();
 
-		
-		Cookie[] cookies =request.getCookies();
-		String userName=null;
-		if(cookies != null) {
-			for(Cookie cookie:cookies) {
+		// Retrieve cookies from the request to find the username cookie.
+		Cookie[] cookies = request.getCookies();
+		String userName = null;
+		if (cookies != null) {
+			for (Cookie cookie : cookies) {
 				if (cookie.getName().equals("user")) {
-					userName= cookie.getValue();
+					userName = cookie.getValue();
 					break;
 				}
 			}
 		}
 
-		
+		// Fetch specific user data from the database using the username.
 		try {
-			
 			ArrayList<UserModel> user = dbController.getSpecificUser(userName);
+			// Set the fetched user details in the request attribute to be accessed in the JSP.
 			request.setAttribute("user", user);
-			request.getRequestDispatcher("pages/userprofile1.jsp").forward(request, response);
-			
-		} catch (ClassNotFoundException e) {
+			// Forward the request to the user profile page.
+			request.getRequestDispatcher("/pages/userprofile1.jsp").forward(request, response);
 
-			// TODO Auto-generated catch block
+		} catch (ClassNotFoundException e) {
+			// Handle ClassNotFoundException, which might be thrown if the JDBC driver isn't found.
 			e.printStackTrace();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			// Handle SQLException for any SQL related errors.
 			e.printStackTrace();
 		}
-
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * Handles POST requests by simply redirecting them to the doGet method.
+	 * This allows the servlet to handle both GET and POST requests similarly.
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
-
 }

@@ -4,7 +4,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/stylesheets/aboutus.css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/stylesheets/aboutus.css">
 <title>About Us</title>
 <script src="https://smtpjs.com/v3/smtp.js"></script>
 
@@ -110,7 +111,7 @@
 					DETAILS</span>
 				<div class="aboutus_contactus_contactdetails_phoneemail">
 					<div class="aboutus_contactus_contactdetails_phone">
-					
+
 						<span class="aboutus_contactus_contactdetails_phone_heading">Phone</span>
 						<span class="aboutus_contactus_contactdetails_phone_number">+977-9803237789</span>
 					</div>
@@ -130,31 +131,36 @@
 					class="aboutus_contactus_subheading">We are looking forward
 					to hearing from you soon!</span>
 			</div>
-            <form id="contactForm" class="aboutus_contactus_rightpart_form">
-                <div class="aboutus_contactus_rightpart_info">
-                    <div class="aboutus_contactus_rightpart_info_align">
-                        <input id="fname" type="text" class="aboutus_contactus_smallertextfield" placeholder="NAME">
-                        <input id="email" type="email" class="aboutus_contactus_smallertextfield" placeholder="EMAIL">
-                    </div>
-                    <div class="aboutus_contactus_rightpart_info_align">
-                        <input id="phone" type="text" class="aboutus_contactus_smallertextfield" placeholder="PHONE">
-                        <input id="address" type="text" class="aboutus_contactus_smallertextfield" placeholder="ADDRESS">
-                    </div>
-                    <div class="aboutus_contactus_rightpart_info_align">
-                        <textarea id="message" class="aboutus_contactus_longertextfield" placeholder="MESSAGE"></textarea>
-                    </div>
-                </div>
-                <div class="aboutus_contactus_button">
-                    <button type="submit" class="aboutus_contactus_sendbutton">SEND</button>
-                </div>
-            </form>
-        </div>
-    </section>
-    
-    <jsp:include page="footer.jsp" />
+			<form id="contactForm" class="aboutus_contactus_rightpart_form">
+				<div class="aboutus_contactus_rightpart_info">
+					<div class="aboutus_contactus_rightpart_info_align">
+						<input id="fname" type="text"
+							class="aboutus_contactus_smallertextfield" placeholder="NAME">
+						<input id="email" type="email"
+							class="aboutus_contactus_smallertextfield" placeholder="EMAIL">
+					</div>
+					<div class="aboutus_contactus_rightpart_info_align">
+						<input id="phone" type="text"
+							class="aboutus_contactus_smallertextfield" placeholder="PHONE">
+						<input id="address" type="text"
+							class="aboutus_contactus_smallertextfield" placeholder="ADDRESS">
+					</div>
+					<div class="aboutus_contactus_rightpart_info_align">
+						<textarea id="message" class="aboutus_contactus_longertextfield"
+							placeholder="MESSAGE"></textarea>
+					</div>
+				</div>
+				<div class="aboutus_contactus_button">
+					<button type="submit" class="aboutus_contactus_sendbutton">SEND</button>
+				</div>
+			</form>
+		</div>
+	</section>
 
-    
-<script>
+	<jsp:include page="footer.jsp" />
+
+
+	<script>
     document.getElementById('contactForm').addEventListener('submit', function(e) {
         e.preventDefault();  // Prevent the default form submission
 
@@ -178,9 +184,6 @@
             `
         }).then(message => alert("Message and email successfully sent!"))
         .catch(error => alert("Failed to send email: " + error));
-
-
-
     });
 </script>
 

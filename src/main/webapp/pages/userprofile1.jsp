@@ -12,26 +12,31 @@
 	href="${pageContext.request.contextPath}/stylesheets/userprofile1.css"}>
 </head>
 <script>
-    function updateUserProfile() {
-        window.location.href = '${pageContext.request.contextPath}/pages/userprofile.jsp';
-    }
+	function updateUserProfile() {
+		window.location.href = '${pageContext.request.contextPath}/pages/userprofile.jsp';
+	}
 </script>
 
 <body>
 	<section class="user">
 		<section class="dashboard">
-		<c:forEach var="user" items="${user}">
-			<div class="images">
-				<img
-					src="${pageContext.request.contextPath}/stylesheets/images/profile.png"
-					alt="Profile Picture">
-				<h1><c:out value="${user.userName}"></c:out></h1>
+			<c:forEach var="user" items="${user}">
+				<div class="images">
+					<img
+						src="${pageContext.request.contextPath}/stylesheets/images/profile.png"
+						alt="Profile Picture">
+					<h1>
+						<c:out value="${user.userName}"></c:out>
+					</h1>
 
-			</div>
+				</div>
 			</c:forEach>
 
 			<div class="options">
-				<a href="">My Profile</a> <a href="">Manage My Account</a> <a href="">My Orders</a> <a href="<%= request.getContextPath() %>/UserLogoutServlet">Logout</a>
+				<a href="">My Profile</a>
+				 <a href="">Manage My Account</a> 
+				 <a href="">My Orders</a> 
+				 <a href="<%=request.getContextPath()%>/UserLogoutServlet">Logout</a>
 			</div>
 
 		</section>
@@ -70,7 +75,7 @@
 										<div class="input-box">
 											<span class="details">User Name</span>
 											<c:out value="${user.userName}"></c:out>
-											
+
 
 										</div>
 										<div class="input-box">

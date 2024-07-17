@@ -62,6 +62,10 @@ public class StringUtils {
 	// JSP Routes
 	public static final String LOGIN_PAGE = "/pages/login.jsp";
 	public static final String REGISTER_PAGE = "/pages/signup.jsp";
+	public static final String HOME_PAGE = "/pages/home.jsp";
+	public static final String ADMIN_DASHBOARD= "/pages/orderlist.jsp";
+	public static final String ERROR_PAGE = "/pages/error.jsp";
+
 
 	// Servlet Routes
 	public static final String REGISTER_SERVLET = "/RegisterServlet";
@@ -71,40 +75,23 @@ public class StringUtils {
 	public static final String GET_PHONE = "SELECT COUNT(*) FROM user_info where phone_number = ? ";
 	public static final String GET_EMAIL = "SELECT COUNT(*) FROM user_info where email = ? ";
 
-	// Session attributes
+	// Session attributestechspace
 	public static final String USER = "user";
 	public static final String JSESSIONID = "JSESSIONID";
-	
+
 	//Cart
 	public static final java.lang.String INSERT_CART_ID = "INSERT INTO cart (cartID, userID) VALUES (?,?)";
-	public static final java.lang.String DELETE_CART = "DELETE FROM cart_product where productId=? and cart_id=?";
+	public static final java.lang.String DELETE_CART = "DELETE FROM cart_item where productID=? and cartID=?";
 	public static final java.lang.String CART_ID = "SELECT cartID FROM cart WHERE user_name=?";
 	public static final java.lang.String ADD_TO_CART = "INSERT INTO cart_item (cartID, productID, quantity) VALUES (?, ?, ?)";
-	public static final java.lang.String GET_CART_PRODUCT_INFO = "SELECT p.productId,p.product_name,p.description,p.category,p.price,p.image,cp.quantity\nFROM cart_product cp JOIN products p ON cp.productId = p.productId JOIN cart c ON cp.cart_id = c.cart_id JOIN user_info u ON c.user_name = u.user_name\nWHERE  c.user_name = ?";
-	
+	public static final java.lang.String GET_CART_PRODUCT_INFO = "SELECT p.productId, p.product_name, p.description, p.category, p.price, p.image, ci.quantity FROM products p JOIN cart_item ci ON p.productId = ci.productID JOIN cart c ON ci.cartID = c.cartID JOIN user_info u ON c.userID = u.userID WHERE u.userID = ?";
+
 	//searchproduct
 	public static final String SEARCH_PRODUCT = "SELECT * FROM products WHERE product_name LIKE ? OR price LIKE ?";
 
 	//orderlist
-	public static final String GET_ORDERS_INFO = "SELECT o.orderID, o.userID, o.orderDate, o.total_amount, o.order_status, u.user_name " +
-            "FROM order o " +
-            "JOIN user_info u ON o.userID = u.userID " +
-            "WHERE o.userID = ?";
-
-	public static final String FETCH_ORDER = "SELECT orderID, userID, orderDate, total_amount, order_status " +
-	        "FROM order " +
-	        "WHERE orderID = ?";
-	
-	public static final String FIND_USER = "SELECT userID, user_name " +
-	        "FROM user_info " +
-	        "WHERE userID = ?";
-	
-	public static final String FETCH_ORDER_ITEMS = "SELECT detailsID, productID, quantity " +
-	        "FROM order_details " +
-	        "WHERE orderID = ?";
-	
-	public static final String FIND_PRODUCT = "SELECT productID, product_name, price " +
-	        "FROM products " +
-	        "WHERE productID = ?";
-	
+	public static final String GET_ORDERS_INFO = "SELECT o.orderID, o.userID, o.orderDate, o.total_amount, o.order_status " +
+		    "FROM order o " +
+		    "JOIN order_details od ON o.orderID = od.orderID " +
+		    "WHERE o.userID = ?";
 }

@@ -68,14 +68,6 @@ request.setAttribute("productList", productList);
 					</c:forEach>
 				</tbody>
 			</table>
-			<div class="numbers">
-
-				<span style="color: #9BA4B4;">Showing 7 of 380 Products</span>
-				<div class="numbers-controls">
-					<a href="#">&lt;</a> <a href="#">1</a> <a href="#">2</a> <a
-						href="#">3</a> <a href="#">4</a> <a href="#">&gt;</a>
-				</div>
-			</div>
 		</div>
 </div>
 

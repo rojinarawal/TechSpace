@@ -12,30 +12,40 @@ import javax.servlet.http.HttpServletResponse;
 import controller.database.DatabaseController;
 import model.Product;
 
+/**
+ * Servlet implementation class SearchServlet
+ * This servlet handles search functionality within the application.
+ */
 @WebServlet("/SearchServlet")
 public class SearchServlet extends HttpServlet {
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private DatabaseController databasecontroller = new DatabaseController();
+	private DatabaseController databasecontroller = new DatabaseController();
 
-    public SearchServlet() {
-        super();
-    }
+	/**
+	 * Default constructor.
+	 */
+	public SearchServlet() {
+		super();
+	}
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // Get the search query from the request parameter
-        String search_bar = request.getParameter("query");
-        // Prepare the search string for database query
-        String search = "%" + search_bar + "%" ;
+	/**
+	 * Handles GET requests by performing a product search based on user input.
+	 * The search results are forwarded to a JSP page for display.
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// Retrieve the search term from the request parameter
+		String search_bar = request.getParameter("query");
+		// Prepare the search term for a SQL LIKE query
+		String search = "%" + search_bar + "%" ;
 
-        System.out.println(search);
-        // Retrieve products matching the search query
-        List<Product> productsList = databasecontroller.getproductInfobySearch(search);
-        // Set the search results as an attribute to be displayed in the view
-        request.setAttribute("productList", productsList); //
-        // Forward the request to the product.jsp page for displaying search results
-        request.getRequestDispatcher("/pages/product.jsp").forward(request, response);
-    }
-
-
+		// Log the formatted search term to the console (used for debugging purposes)
+		System.out.println(search);
+		// Call the DatabaseController to retrieve a list of products matching the search criteria
+		List<Product> productsList = databasecontroller.getproductInfobySearch(search);
+		// Set the search results as an attribute on the request object for retrieval in the JSP
+		request.setAttribute("productList", productsList);
+		// Forward the request to the product.jsp page to display the search results
+		request.getRequestDispatcher("/pages/product.jsp").forward(request, response);
+	}
 }

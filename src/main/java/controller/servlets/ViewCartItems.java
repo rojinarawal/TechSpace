@@ -50,14 +50,14 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
         HttpSession session = request.getSession(false);
 
         // Retrieving username from session
-        String userName = (String) request.getSession().getAttribute("userName");
+        Integer userId = (Integer) request.getSession().getAttribute("userID");
 
         // Getting list of products in cart for the user
-        ArrayList<Product> cartitem = dbController.getproductinfo(userName);
+        ArrayList<Product> cartitem = dbController.getproductinfo(userId);
 
         // Setting attribute for cart list and forwarding to cart page
         request.setAttribute("cartitems", cartitem);
-        request.getRequestDispatcher("/pages/cart.jsp").forward(request, response);
+        request.getRequestDispatcher("/pages/ViewCartItems.jsp").forward(request, response);
     }
 
 // Method to fetch cart items from database
@@ -85,12 +85,12 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response) 
             // If cart ID is not null, creating CartModel instance
             cart Cart = new cart(cart_id, product_id, quantity);
             // Adding cart item to the database and getting result
-            int result = dbController.addcartitems(Cart);
+            int result = dbController.addcartitems(cart_id,product_id,quantity);
 
             // Handling different results
             switch(result) {
                 case 1 -> {
-                    // If successful, redirecting to cart list page
+                	request.getSession().setAttribute("successMessage", "Item added successfully!");
                     response.sendRedirect(request.getContextPath() + "/ViewCartItems");
                 }
                 default -> {

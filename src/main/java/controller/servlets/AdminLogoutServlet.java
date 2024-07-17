@@ -11,48 +11,50 @@ import javax.servlet.http.HttpSession;
 
 /**
  * Servlet implementation class AdminLogoutServlet
+ * This servlet handles the logout process for administrators by clearing cookies,
+ * invalidating the session, and redirecting to the login page.
  */
 @WebServlet("/AdminLogoutServlet")
 public class AdminLogoutServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public AdminLogoutServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * Default constructor. Calls the parent constructor.
+	 */
+	public AdminLogoutServlet() {
+		super();
+	}
+
+	/**
+	 * Handles GET requests for logging out administrators.
+	 * This method clears all cookies associated with the current user, invalidates the current session,
+	 * and redirects the user to the login page.
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// Retrieve all cookies from the request
+		Cookie[] cookies = request.getCookies();
+		if (cookies != null) {
+			for (Cookie cookie : cookies) {
+				cookie.setMaxAge(0); // Expire the cookie immediately to delete it
+				response.addCookie(cookie); // Update the cookie in the response to reflect the deletion
+			}
+		}
 
-		    // Clear cookies
-		    Cookie[] cookies = request.getCookies();
-		    if (cookies != null) {
-		        for (Cookie cookie : cookies) {
-		            cookie.setMaxAge(0); // Set the cookie's max age to 0 to delete it
-		            response.addCookie(cookie); // Add the cookie to the response to delete it
-		        }
-		    }
-		    
-		    HttpSession session = request.getSession(false); // Get existing session if exists
-		    if (session != null) {
-		        session.invalidate(); // Invalidate the session
-		    }
-		    
-		    // Redirect to login page or any other appropriate page
-		    response.sendRedirect(request.getContextPath() + "/pages/login.jsp");
+		// Get the current session, but do not create a new one if it doesn't exist
+		HttpSession session = request.getSession(false);
+		if (session != null) {
+			session.invalidate(); // Invalidate the session to clear all session data
+		}
+
+		// Redirect the user to the login page after logout
+		response.sendRedirect(request.getContextPath() + "/pages/login.jsp");
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * Handles POST requests by simply forwarding them to the doGet method.
+	 * This is a common pattern when both GET and POST should be handled in the same way.
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
-
 }

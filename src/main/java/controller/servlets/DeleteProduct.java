@@ -12,6 +12,7 @@ import controller.database.DatabaseController;
 
 /**
  * Servlet implementation class DeleteProduct
+ * This servlet handles the deletion of product entries from the database.
  */
 @WebServlet("/DeleteProduct")
 public class DeleteProduct extends HttpServlet {
@@ -20,34 +21,47 @@ public class DeleteProduct extends HttpServlet {
 	private final DatabaseController dbController;
 
 	/**
-	 * @see HttpServlet#HttpServlet()
+	 * Default constructor. Initializes the database controller used to interact with the database.
 	 */
 	public DeleteProduct() {
 		this.dbController = new DatabaseController();
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
+	 * Handles the POST request to initiate product deletion.
+	 * This method checks if a deletion ID is provided and if so, it calls the doDelete method.
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		// Retrieve the product ID to delete from request parameters
 		String deleteId = request.getParameter("deleteId");
 
+		// Ensure the deletion ID is present and valid before proceeding
 		if (deleteId != null && !deleteId.isEmpty()) {
 			doDelete(request, response);
 		}
 	}
 
+	/**
+	 * Custom deletion method to handle the deletion process.
+	 * Performs the actual database deletion of the product based on the provided ID.
+	 */
 	@Override
 	protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		// Log to console when deletion is triggered (for debugging purposes)
 		System.out.println("delete triggered");
-		int productId = Integer.parseInt(req.getParameter("deleteId")); // Convert String to int
+
+		// Parse the product ID from the request
+		int productId = Integer.parseInt(req.getParameter("deleteId"));
+		
+		// Call the database controller to delete the product by its ID
 		if (dbController.deleteProduct(productId) == 1) {
-			 resp.sendRedirect(req.getHeader("referer"));
+			// Redirect back to the referring page if deletion is successful
+			resp.sendRedirect(req.getHeader("referer"));
 		} else {
+			// Log an error and redirect back to the referring page if deletion fails
 			System.out.print("error");
-			resp.sendRedirect(req.getHeader("referer")); // Redirect back to the previous page
+			resp.sendRedirect(req.getHeader("referer"));
 		}
 	}
 }

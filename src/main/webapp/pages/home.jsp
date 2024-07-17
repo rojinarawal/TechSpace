@@ -12,70 +12,77 @@
 </head>
 <body>
 	<jsp:include page="header.jsp" />
-		<div class="main-content">
-			<img
-				src="${pageContext.request.contextPath}/stylesheets/images/image 2.png"
-				alt="AirPods Max">
-			<div class="product-info">
-				<h1 class="product-title">
-					Air </br> Pods </br> Max
-				</h1>
-				<p class="product-description">
-					Meet AirPods Max: The epitome of</br> immersive sound and luxury design.</br>
-					With custom drivers, active noise</br> cancellation,and seamless Apple </br>integration,
-					elevate your audio experience</br> to new heights.
-				</p>
-				<a href="${pageContext.request.contextPath}/ShowProductsServlet" class="shop-now-btn">Shop Now</a>
+	<div class="main-content">
+		<img
+			src="${pageContext.request.contextPath}/stylesheets/images/image 2.png"
+			alt="AirPods Max">
+		<div class="product-info">
+			<h1 class="product-title">
+				Air </br> Pods </br> Max
+			</h1>
+			<p class="product-description">
+				Meet AirPods Max: The epitome of</br> immersive sound and luxury design.</br>
+				With custom drivers, active noise</br> cancellation,and seamless Apple </br>integration,
+				elevate your audio experience</br> to new heights.
+			</p>
+			<a href="${pageContext.request.contextPath}/ShowProductsServlet"
+				class="shop-now-btn">Shop Now</a>
 
-			</div>
-			<img
-				src="${pageContext.request.contextPath}/stylesheets/images/image 3.png"
-				class="nd-img" alt="AirPods Max">
 		</div>
+		<img
+			src="${pageContext.request.contextPath}/stylesheets/images/image 3.png"
+			class="nd-img" alt="AirPods Max">
+	</div>
 	</section>
 	<section class="category-section">
 		<h2>SHOP BY CATEGORY</h2>
 		<div class="categories">
 			<div class="category">
-				<a href="${pageContext.request.contextPath}/ShowProductsServlet?category=smartphone" >
-				<img
+				<a
+					href="${pageContext.request.contextPath}/ShowProductsServlet?category=smartphone">
+					<img
 					src="${pageContext.request.contextPath}/stylesheets/images/Frame 703.png"
 					alt="Smartphones & Tablets">
 				</a>
 			</div>
 			<div class="category">
-				<a href="${pageContext.request.contextPath}/ShowProductsServlet?category=wearable" >
-				<img
+				<a
+					href="${pageContext.request.contextPath}/ShowProductsServlet?category=wearable">
+					<img
 					src="${pageContext.request.contextPath}/stylesheets/images/Frame 705.png"
 					alt="Wearable Technology">
 				</a>
 			</div>
 			<div class="category">
-				<a href="${pageContext.request.contextPath}/ShowProductsServlet?category=laptops" >
+				<a
+					href="${pageContext.request.contextPath}/ShowProductsServlet?category=laptops">
 					<img
-						src="${pageContext.request.contextPath}/stylesheets/images/Frame 704.png"
-						alt="Laptops & Computers">
+					src="${pageContext.request.contextPath}/stylesheets/images/Frame 704.png"
+					alt="Laptops & Computers">
 				</a>
 			</div>
 			<div class="category">
-				<a href="${pageContext.request.contextPath}/ShowProductsServlet?category=audio" >
+				<a
+					href="${pageContext.request.contextPath}/ShowProductsServlet?category=audio">
 					<img
-						src="${pageContext.request.contextPath}/stylesheets/images/Frame 706.png"
-						alt="Audio Devices">
+					src="${pageContext.request.contextPath}/stylesheets/images/Frame 706.png"
+					alt="Audio Devices">
 				</a>
 			</div>
 			<div class="category">
-				<a href="${pageContext.request.contextPath}/ShowProductsServlet?category=gamming" >
+				<a
+					href="${pageContext.request.contextPath}/ShowProductsServlet?category=gamming">
 					<img
-						src="${pageContext.request.contextPath}/stylesheets/images/Frame 707.png"
-						alt="Gaming">
+					src="${pageContext.request.contextPath}/stylesheets/images/Frame 707.png"
+					alt="Gaming">
 				</a>
 			</div>
-			<div class="category">	
-				<a href="${pageContext.request.contextPath}/ShowProductsServlet?category=Home appliance" >
+			<div class="category">
+				<a
+					href="${pageContext.request.contextPath}/ShowProductsServlet?category=Home appliance">
 					<img
-						src="${pageContext.request.contextPath}/stylesheets/images/Frame 708.png"
-						alt="Home Appliances">
+					src="${pageContext.request.contextPath}/stylesheets/images/Frame 708.png"
+					alt="Home Appliances">
 				</a>
 			</div>
 		</div>
@@ -101,7 +108,9 @@
 				your digital lifestyle. From smartphones to smart home devices, our
 				curated selection offers quality products from top brands at
 				competitive prices.</p>
-			<a class="know-more-btn" href="${pageContext.request.contextPath}/pages/aboutus.jsp">Know More</a>
+			<a class="know-more-btn"
+				href="${pageContext.request.contextPath}/pages/aboutus.jsp">Know
+				More</a>
 		</div>
 	</section>
 
@@ -138,7 +147,7 @@
 			</div>
 		</div>
 	</section>
-<jsp:include page="footer.jsp" />
+	<jsp:include page="footer.jsp" />
 
 </body>
 </html>

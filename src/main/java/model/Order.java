@@ -8,7 +8,7 @@ public class Order extends UserModel {
 	private java.sql.Date orderDate;
 	private int total_amount;
 	private String order_status;
-	private ArrayList<OrderDetails> orderdetails;
+	private Product product;
 
 	// Default constructor
 	public Order() {
@@ -20,6 +20,7 @@ public class Order extends UserModel {
 		this.orderDate = orderDate;
 		this.total_amount = total_amount;
 		this.order_status = order_status;
+		this.product=product;
 	}
 
 	public int getOrderID() {
@@ -53,12 +54,13 @@ public class Order extends UserModel {
 	public void setOrder_status(String order_status) {
 		this.order_status = order_status;
 	}
-	public ArrayList<OrderDetails> getOrderdetails() {
-		return orderdetails;
+	
+	public Product getProduct() {
+		return product;
 	}
 
-	public void setOrderdetails(ArrayList<OrderDetails> orderdetails) {
-		this.orderdetails = orderdetails;
+	public void setProduct(Product product) {
+		this.product = product;
 	}
 }
 

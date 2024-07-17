@@ -1,4 +1,4 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -13,6 +13,11 @@
 	<section class="cart">
 		<section class="heading">
 			<h1 class="mycartheading">MY CART</h1>
+			<!-- Success message display area -->
+			<c:if test="${not empty successMessage}">
+				<div class="alert alert-success">${successMessage}</div>
+				<c:remove var="successMessage" scope="session" />
+			</c:if>
 		</section>
 		<div class="downpart">
 			<section class="cartitems">
@@ -24,30 +29,35 @@
 						<th>Total</th>
 						<th>Action</th>
 					</tr>
-					<c:forEach var="item" items="${cartitems}">
-					<tr>
-						<td>
-							<div class="product_list">
-								<img src="${pageContext.request.contextPath}/stylesheets/images/${product.imageUrlFromPart}" alt="product image"
-									class="cart_product_image"> <span class="product_name">${item.productName}</span>
-							</div>
-						</td>
-						<td>Rs.${item.price}</td>
-						<td>
-							<div class="cart_quantity">
-								<p"${item.quantity}"></p>
-							</div>
-						</td>
-						<td>Rs.${item.total}</td>
-						<td> 
-						<form action="/TechSpace/DeleteProduct" method="post">
-							<input type="hidden" name="productID"
-								value="${item.productID}" >
-						<button class="delete" type="submit"> X </button></form>
-						
-						</td>			
-					</tr>
+					<c:forEach var="item" items="${cartitems}" varStatus="loop">
+						<tr>
+							<td>
+								<div class="product_list">
+									<span class="product_name"><c:out
+											value="${item.productname}"></c:out></span>
+								</div>
+							</td>
+							<td><c:out value="Rs.${item.price}"></c:out></td>
+							<td>
+								<div class="cart_quantity">
+									<p>
+										<c:out value="${item.stock}"></c:out>
+									</p>
+								</div>
+							</td>
+							<td><img
+								src="${pageContext.request.contextPath}/stylesheets/images/${item.imageUrlFromPart}"
+								alt="product image" class="cart_product_image"></td>
+							<td><c:if test="${loop.first}">
+									<form action="/TechSpace/DeleteCart" method="post">
+										<input type="hidden" name="productID"
+											value="${item.productID}">
+										<button class="submit" type="submit">X</button>
+									</form>
+								</c:if></td>
+						</tr>
 					</c:forEach>
+
 				</table>
 			</section>
 			<section class="ordersummary">

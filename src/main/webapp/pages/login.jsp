@@ -15,17 +15,18 @@
 <body>
 	<section class="login">
 		<section>
-			<% 
-		String errorMessage = (String) request.getAttribute(StringUtils.ERROR_MESSAGE);
-		if(errorMessage != null && !errorMessage.isEmpty()){
-		%>
-			<p class="error-message"><%=errorMessage %></p>
 			<%
-		}
-		%>
+			String errorMessage = (String) request.getAttribute(StringUtils.ERROR_MESSAGE);
+			if (errorMessage != null && !errorMessage.isEmpty()) {
+			%>
+			<p class="error-message"><%=errorMessage%></p>
+			<%
+			}
+			%>
 			<h1>Sign in</h1>
 			<div class="info">
-				<form action="/TechSpace/LoginServlet" method="post" class="info_container">
+				<form action="/TechSpace/LoginServlet" method="post"
+					class="info_container">
 					<div class="user-details">
 						<div class="input-box">
 							<span class="details">Username</span> <input type="text"
